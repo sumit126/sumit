@@ -1,0 +1,24 @@
+{
+  "name": "WEDDUXE — Luxury Wedding Video Editing",
+  "short_name": "WEDDUXE",
+  "description": "Cinematic wedding films crafted with emotion. 7+ years, 500+ weddings delivered. Based in Bhubaneswar, Odisha.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1E0D22",
+  "theme_color": "#1E0D22",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "photography"],
+  "lang": "en-IN",
+  "dir": "ltr",
+  "scope": "/",
+  "related_applications": [],
+  "prefer_related_applications": false
+}
