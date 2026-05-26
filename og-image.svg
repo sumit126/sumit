@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E0D22"/>
+      <stop offset="50%" stop-color="#361C3B"/>
+      <stop offset="100%" stop-color="#1E0D22"/>
+    </linearGradient>
+    <linearGradient id="goldShine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8A7050"/>
+      <stop offset="50%" stop-color="#D4BA8A"/>
+      <stop offset="100%" stop-color="#8A7050"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="40" y="40" width="1120" height="550" fill="none" stroke="#BCA371" stroke-width="1" opacity="0.35"/>
+  <line x1="60" y1="60" x2="120" y2="60" stroke="#BCA371" stroke-width="1.5"/>
+  <line x1="60" y1="60" x2="60" y2="120" stroke="#BCA371" stroke-width="1.5"/>
+  <line x1="1080" y1="570" x2="1140" y2="570" stroke="#BCA371" stroke-width="1.5"/>
+  <line x1="1140" y1="510" x2="1140" y2="570" stroke="#BCA371" stroke-width="1.5"/>
+  <text x="600" y="200" font-family="Cormorant Garamond, Georgia, serif" font-size="22" font-weight="500" fill="#BCA371" text-anchor="middle" letter-spacing="8">LUXURY WEDDING FILMS</text>
+  <line x1="560" y1="225" x2="640" y2="225" stroke="#BCA371" stroke-width="1"/>
+  <text x="600" y="335" font-family="Cormorant Garamond, Georgia, serif" font-size="100" font-weight="300" fill="#E8E2CD" text-anchor="middle" letter-spacing="20">WEDD</text>
+  <text x="838" y="335" font-family="Cormorant Garamond, Georgia, serif" font-size="100" font-weight="600" fill="url(#goldShine)" text-anchor="middle" font-style="italic">U</text>
+  <text x="912" y="335" font-family="Cormorant Garamond, Georgia, serif" font-size="100" font-weight="300" fill="#E8E2CD" text-anchor="middle" letter-spacing="20">XE</text>
+  <line x1="500" y1="380" x2="700" y2="380" stroke="#BCA371" stroke-width="0.8" opacity="0.6"/>
+  <text x="600" y="430" font-family="Cormorant Garamond, Georgia, serif" font-size="32" font-weight="300" fill="#C9C2AC" text-anchor="middle" font-style="italic">Every Love Story Deserves Cinema</text>
+  <text x="600" y="510" font-family="Jost, sans-serif" font-size="16" font-weight="400" fill="#BCA371" text-anchor="middle" letter-spacing="6">7+ YEARS  &#183;  500+ WEDDINGS  &#183;  BHUBANESWAR, ODISHA</text>
+</svg>
