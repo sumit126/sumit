@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WEDDUXE | Luxury Wedding Video Editing — Bhubaneswar, Odisha</title>
+  <meta name="description" content="WEDDUXE — Luxury wedding video editing studio in Bhubaneswar, Odisha. Cinematic wedding films crafted with emotion. 7+ years, 500+ weddings delivered."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --plum: #361C3B;
+      --plum-dark: #1E0D22;
+      --plum-mid: #2A1530;
+      --ivory: #E8E2CD;
+      --ivory-dim: #C9C2AC;
+      --gold: #BCA371;
+      --gold-light: #D4BA8A;
+      --gold-dark: #8A7050;
+      --ff-display: 'Cormorant Garamond', Georgia, serif;
+      --ff-body: 'Jost', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--plum-dark);
+      color: var(--ivory);
+      font-family: var(--ff-body);
+      font-weight: 300;
+      overflow-x: hidden;
+      line-height: 1.7;
+    }
+
+    /* CINEMATIC GRAIN OVERLAY */
+    #grain-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.055;
+      mix-blend-mode: screen;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.6rem 5%;
+      transition: background 0.4s, padding 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(30,13,34,0.96);
+      backdrop-filter: blur(14px);
+      padding: 1rem 5%;
+      border-bottom: 1px solid rgba(188,163,113,0.15);
+    }
+    .nav-logo {
+      font-family: var(--ff-display);
+      font-size: 1.55rem; font-weight: 600;
+      letter-spacing: 0.25em; color: var(--ivory);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.7rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--ivory-dim);
+      text-decoration: none; transition: color 0.3s;
+      font-weight: 500;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+    .nav-cta {
+      font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+      padding: 0.6rem 1.4rem; background: var(--gold); color: var(--plum-dark);
+      text-decoration: none; transition: background 0.3s; white-space: nowrap;
+    }
+    .nav-cta:hover { background: var(--gold-light); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { width: 24px; height: 1.5px; background: var(--ivory); }
+    .mobile-menu {
+      display: none; position: fixed; inset: 0;
+      background: var(--plum-dark); z-index: 999;
+      flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: var(--ff-display); font-size: 2rem; color: var(--ivory); text-decoration: none; }
+    .mobile-menu a:hover { color: var(--gold); }
+    .mobile-close { position: absolute; top: 1.5rem; right: 5%; font-size: 1.8rem; color: var(--ivory-dim); cursor: pointer; background: none; border: none; }
+
+    /* HERO */
+    #hero {
+      position: relative;
+      height: 100vh; min-height: 620px;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; overflow: hidden;
+    }
+    .hero-video-bg {
+      position: absolute; inset: 0; z-index: 0;
+      overflow: hidden;
+      will-change: transform;
+      transform: translateZ(0);
+    }
+    #heroBgVideo {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 177.78vh;
+      height: 100vh;
+      min-width: 100vw;
+      min-height: 56.25vw;
+      pointer-events: none;
+    }
+    #heroBgVideo iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none; pointer-events: none;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(
+        to bottom,
+        rgba(30,13,34,0.55) 0%,
+        rgba(30,13,34,0.35) 50%,
+        rgba(30,13,34,0.90) 100%
+      );
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 860px; padding: 0 2rem;
+    }
+    .hero-eyebrow {
+      font-size: 0.68rem; letter-spacing: 0.45em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 1.8rem;
+      animation: fadeUp 1s ease 0.3s both;
+    }
+    .hero-title {
+      font-family: var(--ff-display);
+      font-size: clamp(3.2rem, 9vw, 6.5rem);
+      font-weight: 300; line-height: 1.05;
+      letter-spacing: 0.04em; color: var(--ivory);
+      animation: fadeUp 1s ease 0.5s both;
+      margin-bottom: 0.3rem;
+    }
+    .hero-title em { font-style: italic; color: var(--gold); }
+    .hero-tagline {
+      margin: 1.6rem auto 0;
+      font-size: 1rem; font-weight: 300;
+      color: var(--ivory-dim); letter-spacing: 0.04em;
+      max-width: 480px; line-height: 2;
+      animation: fadeUp 1s ease 0.7s both;
+    }
+    .hero-buttons {
+      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+      margin-top: 2.5rem;
+      animation: fadeUp 1s ease 0.9s both;
+    }
+    .btn {
+      font-family: var(--ff-body); font-size: 0.72rem;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      padding: 1rem 2.8rem; cursor: pointer;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;
+      transition: all 0.3s;
+    }
+    .btn-primary { background: var(--gold); color: var(--plum-dark); border: 1px solid var(--gold); font-weight: 500; }
+    .btn-primary:hover { background: var(--gold-light); border-color: var(--gold-light); transform: translateY(-2px); }
+    .btn-outline { background: transparent; color: var(--ivory); border: 1px solid rgba(232,226,205,0.45); }
+    .btn-outline:hover { border-color: var(--ivory); background: rgba(232,226,205,0.06); transform: translateY(-2px); }
+    .hero-scroll {
+      position: absolute; bottom: 2.5rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      animation: fadeIn 1s ease 1.5s both;
+    }
+    .hero-scroll span { font-size: 0.56rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold-dark); }
+    .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--gold-dark), transparent); animation: pulse 2s ease infinite; }
+
+    /* STATS */
+    .stats-strip {
+      background: rgba(42,21,48,0.9);
+      border-top: 1px solid rgba(188,163,113,0.15);
+      border-bottom: 1px solid rgba(188,163,113,0.15);
+      display: flex; justify-content: center; flex-wrap: wrap;
+    }
+    .stat-item {
+      text-align: center; padding: 2.5rem 3.5rem;
+      border-right: 1px solid rgba(188,163,113,0.12);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-number { font-family: var(--ff-display); font-size: 3.2rem; font-weight: 300; color: var(--gold); line-height: 1; }
+    .stat-label { font-size: 0.62rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--ivory-dim); margin-top: 0.6rem; }
+
+    /* QUOTE BAND */
+    #quote-band {
+      background: var(--plum);
+      border-top: 1px solid rgba(188,163,113,0.1);
+      border-bottom: 1px solid rgba(188,163,113,0.1);
+      padding: 4rem 5%;
+      text-align: center;
+      overflow: hidden;
+    }
+    .quote-band-inner { max-width: 800px; margin: 0 auto; position: relative; }
+    .quote-slider {
+      position: relative;
+      min-height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .quote-slide {
+      position: absolute;
+      width: 100%;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+      pointer-events: none;
+    }
+    .quote-slide.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .quote-slide.exiting {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    .quote-band-text {
+      font-family: var(--ff-display);
+      font-size: clamp(1.6rem, 4vw, 2.6rem);
+      font-weight: 300; font-style: italic;
+      color: var(--ivory); line-height: 1.4;
+      letter-spacing: 0.02em;
+    }
+    .quote-band-text em { color: var(--gold); font-style: normal; }
+    .quote-band-sub {
+      margin-top: 1.2rem;
+      font-size: 0.7rem; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--gold-dark);
+    }
+    .quote-dots {
+      display: flex; gap: 0.5rem; justify-content: center;
+      margin-top: 1.5rem;
+    }
+    .quote-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: rgba(188,163,113,0.3);
+      transition: background 0.3s, transform 0.3s;
+      cursor: pointer;
+    }
+    .quote-dot.active { background: var(--gold); transform: scale(1.3); }
+
+    /* UTILS */
+    .gold-line { display: block; width: 60px; height: 1px; background: var(--gold); margin: 1.4rem auto; }
+    .gold-line.left { margin-left: 0; }
+    .section-label { font-size: 0.68rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold); }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    section { padding: 6rem 5%; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+
+    /* ABOUT */
+    #about { background: var(--plum-dark); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .about-visual { position: relative; }
+
+    .about-frame {
+      width: 100%; aspect-ratio: 4/5;
+      background: var(--plum-mid);
+      border: 1px solid rgba(188,163,113,0.2);
+      position: relative; overflow: hidden;
+    }
+    .about-frame::before,
+    .about-frame::after {
+      content: '';
+      position: absolute;
+      width: 30px; height: 30px;
+      border-color: var(--gold);
+      border-style: solid;
+      z-index: 2;
+      opacity: 0.6;
+    }
+    .about-frame::before {
+      top: 10px; left: 10px;
+      border-width: 1px 0 0 1px;
+    }
+    .about-frame::after {
+      bottom: 10px; right: 10px;
+      border-width: 0 1px 1px 0;
+    }
+    .about-frame-video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .about-frame-yt {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+    .about-frame-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(to top, rgba(30,13,34,0.7) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .about-frame-play {
+      position: absolute; inset: 0; z-index: 3;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .about-frame-play:hover { background: rgba(30,13,34,0.2); }
+    .about-frame-play-btn {
+      width: 64px; height: 64px;
+      border: 1.5px solid var(--gold);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.3s, background 0.3s;
+      background: rgba(30,13,34,0.5);
+    }
+    .about-frame-play:hover .about-frame-play-btn {
+      transform: scale(1.12);
+      background: rgba(188,163,113,0.2);
+    }
+    .about-frame-caption {
+      position: absolute; bottom: 1.2rem; left: 1.2rem; right: 1.2rem;
+      z-index: 3;
+      font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold-light);
+    }
+    .about-frame-corner-tl, .about-frame-corner-br {
+      position: absolute;
+      width: 26px; height: 26px;
+      border-color: var(--gold);
+      border-style: solid;
+      z-index: 4; opacity: 0.55;
+    }
+    .about-frame-corner-tl { top: 10px; left: 10px; border-width: 1px 0 0 1px; }
+    .about-frame-corner-br { bottom: 10px; right: 10px; border-width: 0 1px 1px 0; }
+
+    .about-text h2 { font-family: var(--ff-display); font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 400; line-height: 1.2; margin-bottom: 0.6rem; }
+    .about-text h2 em { color: var(--gold); font-style: italic; }
+    .about-text p { color: var(--ivory-dim); line-height: 2; margin-bottom: 1.2rem; font-size: 0.93rem; }
+    .about-pillars { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem; }
+    .pillar { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; border: 1px solid rgba(188,163,113,0.35); color: var(--gold); padding: 0.5rem 1.1rem; }
+
+    /* PORTFOLIO */
+    #portfolio { background: var(--plum-mid); }
+    .section-header { text-align: center; margin-bottom: 3.5rem; }
+    .section-header h2 { font-family: var(--ff-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 400; }
+    .section-header h2 em { font-style: italic; color: var(--gold); }
+
+    .portfolio-tabs {
+      display: flex; gap: 0; justify-content: center; flex-wrap: wrap;
+      margin-bottom: 3rem;
+      border: 1px solid rgba(188,163,113,0.2);
+      width: fit-content;
+      margin-left: auto; margin-right: auto;
+    }
+    .portfolio-tab {
+      font-family: var(--ff-body);
+      font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+      padding: 0.75rem 1.5rem;
+      cursor: pointer;
+      background: transparent; color: var(--ivory-dim);
+      border: none; border-right: 1px solid rgba(188,163,113,0.2);
+      transition: all 0.3s;
+    }
+    .portfolio-tab:last-child { border-right: none; }
+    .portfolio-tab:hover { color: var(--gold); background: rgba(188,163,113,0.05); }
+    .portfolio-tab.active { background: var(--gold); color: var(--plum-dark); }
+
+    #yt-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .yt-card {
+      background: var(--plum);
+      border: 1px solid rgba(188,163,113,0.1);
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .yt-card:hover { border-color: rgba(188,163,113,0.45); transform: translateY(-4px); }
+    .yt-card-category {
+      font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold); padding: 0.5rem 0.8rem;
+      background: rgba(188,163,113,0.06);
+      border-bottom: 1px solid rgba(188,163,113,0.1);
+    }
+    .yt-thumb {
+      position: relative; aspect-ratio: 16/9;
+      overflow: hidden; cursor: pointer;
+    }
+    .yt-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+    .yt-thumb:hover img { transform: scale(1.05); }
+    .yt-play {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(30,13,34,0.3);
+      transition: background 0.3s;
+    }
+    .yt-thumb:hover .yt-play { background: rgba(30,13,34,0.15); }
+    .yt-play-btn {
+      width: 56px; height: 56px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.3s, background 0.3s;
+    }
+    .yt-thumb:hover .yt-play-btn { transform: scale(1.15); background: var(--gold-light); }
+    .yt-play-btn svg { width: 18px; height: 18px; fill: var(--plum-dark); margin-left: 3px; }
+    .yt-info { padding: 1.2rem 1.4rem; }
+    .yt-title { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; color: var(--ivory); margin-bottom: 0.4rem; line-height: 1.4; }
+    .yt-date { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold-dark); }
+    .yt-loading {
+      grid-column: 1/-1; text-align: center;
+      padding: 4rem; color: var(--ivory-dim); font-size: 0.85rem; letter-spacing: 0.1em;
+    }
+    .yt-loading .spinner {
+      width: 30px; height: 30px;
+      border: 1px solid rgba(188,163,113,0.2);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 1rem;
+    }
+    .video-modal {
+      display: none; position: fixed; inset: 0; z-index: 2000;
+      background: rgba(10,4,14,0.95);
+      align-items: center; justify-content: center;
+    }
+    .video-modal.open { display: flex; }
+    .modal-inner { position: relative; width: 90vw; max-width: 960px; }
+    .modal-inner iframe { width: 100%; aspect-ratio: 16/9; border: none; }
+    .modal-close {
+      position: absolute; top: -2.5rem; right: 0;
+      font-size: 1.5rem; color: var(--ivory-dim);
+      cursor: pointer; background: none; border: none;
+      letter-spacing: 0.1em; font-family: var(--ff-body);
+    }
+    .portfolio-social { text-align: center; margin-top: 3rem; }
+    .portfolio-social p { color: var(--ivory-dim); margin-bottom: 1.2rem; font-size: 0.88rem; letter-spacing: 0.05em; }
+    .social-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .social-link {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); text-decoration: none;
+      border: 1px solid rgba(188,163,113,0.3);
+      padding: 0.75rem 1.6rem; transition: all 0.3s;
+    }
+    .social-link:hover { background: var(--gold); color: var(--plum-dark); }
+    .social-link svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    /* WHY CHOOSE US */
+    #why { background: var(--plum-dark); }
+    .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3.5rem; }
+    .why-card {
+      background: var(--plum-mid);
+      border: 1px solid rgba(188,163,113,0.1);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .why-card:hover { border-color: rgba(188,163,113,0.4); transform: translateY(-4px); }
+    .why-icon { font-size: 2rem; margin-bottom: 1.2rem; display: block; }
+    .why-card h3 { font-family: var(--ff-display); font-size: 1.3rem; font-weight: 400; color: var(--ivory); margin-bottom: 0.8rem; }
+    .why-card p { font-size: 0.85rem; color: var(--ivory-dim); line-height: 1.9; }
+
+    /* TESTIMONIALS */
+    #testimonials { background: var(--plum-mid); }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+    .google-rating-summary {
+      display: flex; align-items: center; gap: 1.2rem;
+      justify-content: center; margin-top: 1.5rem;
+      padding: 1.2rem 2rem;
+      border: 1px solid rgba(188,163,113,0.15);
+      background: rgba(42,21,48,0.5);
+      width: fit-content; margin-left: auto; margin-right: auto;
+    }
+    .google-logo { display: flex; align-items: center; }
+    .google-score { display: flex; flex-direction: column; align-items: flex-start; }
+    .google-number { font-family: var(--ff-display); font-size: 2.4rem; font-weight: 300; color: var(--gold); line-height: 1; }
+    .google-stars-row { color: #FBBC05; font-size: 1rem; letter-spacing: 0.1em; margin: 0.2rem 0; }
+    .google-count { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ivory-dim); }
+    .testimonial-card {
+      background: var(--plum);
+      padding: 1.8rem;
+      border: 1px solid rgba(188,163,113,0.1);
+      border-radius: 2px;
+      position: relative;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .testimonial-card:hover { transform: translateY(-3px); border-color: rgba(188,163,113,0.35); }
+    .review-header { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 0.8rem; }
+    .reviewer-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--ff-display); font-size: 1.2rem; font-weight: 600;
+      color: var(--plum-dark); flex-shrink: 0;
+    }
+    .reviewer-info { flex: 1; }
+    .reviewer-info strong { display: block; font-family: var(--ff-display); font-size: 1.05rem; color: var(--ivory); font-weight: 400; }
+    .reviewer-sub { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-dark); }
+    .google-badge { margin-left: auto; opacity: 0.7; flex-shrink: 0; }
+    .review-stars { color: #FBBC05; font-size: 0.9rem; letter-spacing: 0.1em; margin-bottom: 0.8rem; }
+    .testimonial-text { font-size: 0.86rem; line-height: 1.9; color: var(--ivory-dim); font-style: italic; }
+    .review-date { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(188,163,113,0.4); margin-top: 1rem; }
+
+    /* CTA BAND */
+    #cta-band {
+      background: linear-gradient(135deg, var(--plum) 0%, var(--plum-dark) 100%);
+      border-top: 1px solid rgba(188,163,113,0.2);
+      border-bottom: 1px solid rgba(188,163,113,0.2);
+      padding: 5rem 5%; text-align: center;
+    }
+    #cta-band h2 { font-family: var(--ff-display); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 300; margin-bottom: 1rem; }
+    #cta-band h2 em { color: var(--gold); font-style: italic; }
+    #cta-band p { color: var(--ivory-dim); font-size: 0.95rem; max-width: 480px; margin: 0 auto 2.5rem; line-height: 2; }
+    .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* FOOTER */
+    footer {
+      background: var(--plum-dark);
+      border-top: 1px solid rgba(188,163,113,0.12);
+      padding: 3.5rem 5%; text-align: center;
+    }
+    .footer-logo { font-family: var(--ff-display); font-size: 2rem; letter-spacing: 0.25em; color: var(--ivory); margin-bottom: 1.5rem; }
+    .footer-logo span { color: var(--gold); }
+    .footer-nav { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; list-style: none; margin-bottom: 2rem; }
+    .footer-nav a { font-size: 0.63rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ivory-dim); text-decoration: none; transition: color 0.3s; }
+    .footer-nav a:hover { color: var(--gold); }
+    .footer-social { display: flex; gap: 1.2rem; justify-content: center; margin-bottom: 2rem; }
+    .footer-social a {
+      width: 40px; height: 40px; border-radius: 50%;
+      border: 1px solid rgba(188,163,113,0.3);
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    .footer-social a:hover { background: var(--gold); border-color: var(--gold); }
+    .footer-social a svg { width: 18px; height: 18px; }
+    .footer-copy { font-size: 0.68rem; color: var(--gold-dark); letter-spacing: 0.12em; }
+
+    /* FLOATING BUTTONS */
+    .floating-btns {
+      position: fixed; bottom: 1.8rem; right: 1.8rem;
+      display: flex; flex-direction: column; gap: 0.8rem;
+      z-index: 500;
+    }
+    .float-btn {
+      width: 52px; height: 52px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.45);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .float-btn:hover { transform: scale(1.12); box-shadow: 0 6px 22px rgba(0,0,0,0.55); }
+    .float-wa { background: #25D366; }
+    .float-ig { background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+    .float-btn svg { width: 24px; height: 24px; flex-shrink: 0; }
+    .float-label {
+      position: absolute;
+      right: 62px;
+      background: rgba(30,13,34,0.9);
+      color: var(--ivory);
+      font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 0.3rem 0.7rem;
+      white-space: nowrap;
+      border: 1px solid rgba(188,163,113,0.2);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.2s;
+    }
+    .float-btn-wrap { position: relative; display: flex; align-items: center; }
+    .float-btn-wrap:hover .float-label { opacity: 1; }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: none; } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes pulse { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      #yt-grid { grid-template-columns: repeat(2, 1fr); }
+      .why-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-frame { aspect-ratio: 16/9; }
+      .stat-item { border-right: none; border-bottom: 1px solid rgba(188,163,113,0.12); padding: 1.8rem 1.5rem; }
+      .stat-item:last-child { border-bottom: none; }
+      .stats-strip { flex-direction: column; }
+    }
+    @media (max-width: 600px) {
+      section { padding: 4.5rem 5%; }
+      #yt-grid { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+      .hero-buttons { flex-direction: column; align-items: center; }
+      .hero-buttons .btn { width: 100%; max-width: 280px; text-align: center; justify-content: center; }
+      .float-btn { width: 48px; height: 48px; }
+      .floating-btns { bottom: 1.2rem; right: 1.2rem; }
+      .portfolio-tabs { width: 100%; }
+      .portfolio-tab { flex: 1; padding: 0.65rem 0.8rem; font-size: 0.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="grain-canvas"></canvas>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">WEDD<span>U</span>XE</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Book Your Project</a>
+  <div class="hamburger" onclick="openMenu()"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="closeMenu()">&#10005;</button>
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#portfolio" onclick="closeMenu()">Portfolio</a>
+  <a href="#why" onclick="closeMenu()">Why Us</a>
+  <a href="services.html" onclick="closeMenu()">Services</a>
+  <a href="contact.html" onclick="closeMenu()">Contact</a>
+</div>
+
+<section id="hero">
+  <div class="hero-video-bg">
+    <div id="heroBgVideo"></div>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1 class="hero-title">Every Love Story<br>Deserves <em>Cinema</em></h1>
+    <p class="hero-tagline">Luxury wedding films crafted with emotion &mdash; turning your most precious moments into timeless cinematic memories.</p>
+    <div class="hero-buttons">
+      <a href="contact.html" class="btn btn-primary">Book Your Project</a>
+      <a href="#portfolio" class="btn btn-outline">View Our Work</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<div class="stats-strip">
+  <div class="stat-item reveal"><div class="stat-number">7+</div><div class="stat-label">Years of Experience</div></div>
+  <div class="stat-item reveal"><div class="stat-number">500+</div><div class="stat-label">Wedding Films Edited</div></div>
+  <div class="stat-item reveal"><div class="stat-number">20+</div><div class="stat-label">Studio Clients</div></div>
+  <div class="stat-item reveal"><div class="stat-number">100%</div><div class="stat-label">Emotion Preserved</div></div>
+</div>
+
+<div id="quote-band">
+  <div class="quote-band-inner reveal">
+    <div class="quote-slider" id="quoteSlider">
+      <div class="quote-slide active">
+        <p class="quote-band-text">&ldquo;Moments Fade. <em>Memories Don't.</em>&rdquo;</p>
+        <p class="quote-band-sub">&mdash; The Wedduxe Promise</p>
+      </div>
+      <div class="quote-slide">
+        <p class="quote-band-text">&ldquo;Your wedding day lasts a few hours.<br><em>Your film lasts a lifetime.</em>&rdquo;</p>
+        <p class="quote-band-sub">&mdash; The Wedduxe Promise</p>
+      </div>
+      <div class="quote-slide">
+        <p class="quote-band-text">&ldquo;We don't just edit footage.<br><em>We craft your love story.</em>&rdquo;</p>
+        <p class="quote-band-sub">&mdash; The Wedduxe Promise</p>
+      </div>
+      <div class="quote-slide">
+        <p class="quote-band-text">&ldquo;Cinema begins where<br><em>ordinary editing ends.</em>&rdquo;</p>
+        <p class="quote-band-sub">&mdash; The Wedduxe Promise</p>
+      </div>
+    </div>
+    <div class="quote-dots" id="quoteDots">
+      <div class="quote-dot active" onclick="goToQuote(0)"></div>
+      <div class="quote-dot" onclick="goToQuote(1)"></div>
+      <div class="quote-dot" onclick="goToQuote(2)"></div>
+      <div class="quote-dot" onclick="goToQuote(3)"></div>
+    </div>
+  </div>
+</div>
+
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+
+      <div class="about-visual reveal">
+        <div class="about-frame" id="aboutFrame">
+          <img
+            class="about-frame-video"
+            src="https://img.youtube.com/vi/ht9Hb7AjCgY/maxresdefault.jpg"
+            alt="Wedduxe — Cinematic Wedding Film"
+            onerror="this.src='https://img.youtube.com/vi/ht9Hb7AjCgY/hqdefault.jpg'"
+            id="aboutThumb"
+          />
+          <div class="about-frame-overlay"></div>
+          <div class="about-frame-corner-tl"></div>
+          <div class="about-frame-corner-br"></div>
+          <div class="about-frame-play" onclick="openVideo('ht9Hb7AjCgY')" title="Watch our highlight reel">
+            <div class="about-frame-play-btn">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:24px;height:24px;">
+                <path d="M8 5.14v14l11-7-11-7z" fill="var(--gold)"/>
+              </svg>
+            </div>
+          </div>
+          <div class="about-frame-caption">&#10022; Watch Our Cinematic Reel</div>
+        </div>
+      </div>
+
+      <div class="about-text reveal">
+        <span class="section-label">Our Story</span>
+        <span class="gold-line left"></span>
+        <h2>Crafting <em>Timeless</em><br>Cinematic Memories</h2>
+        <p>Wedduxe creates cinematic wedding films that transform real moments into timeless memories. Based in Bhubaneswar, Odisha, we are dedicated to the art of visual storytelling &mdash; capturing every emotion, every glance, every tear.</p>
+        <p>With 7+ years of experience and 500+ weddings delivered, our editing goes far beyond cutting clips. We craft narrative arcs, perfect the color grade, and score the music to produce films that feel less like recordings and more like <em>cinema</em>.</p>
+        <div class="about-pillars">
+          <span class="pillar">Storytelling</span>
+          <span class="pillar">Precision</span>
+          <span class="pillar">Elegance</span>
+          <span class="pillar">Authenticity</span>
+          <span class="pillar">Emotion</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="portfolio">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-label">Our Work</span>
+      <span class="gold-line"></span>
+      <h2>Cinematic Stories <em>We've Created</em></h2>
+    </div>
+
+    <div class="portfolio-tabs reveal" id="portfolioTabs">
+      <button class="portfolio-tab active" onclick="filterPortfolio('highlight', this)">Highlight Reels</button>
+      <button class="portfolio-tab" onclick="filterPortfolio('teaser', this)">Teasers</button>
+      <button class="portfolio-tab" onclick="filterPortfolio('prewedding', this)">Pre-Wedding</button>
+    </div>
+
+    <div id="yt-grid">
+      <div class="yt-loading">
+        <div class="spinner"></div>
+        Loading latest films&hellip;
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="video-modal" id="videoModal" onclick="closeModal(event)">
+  <div class="modal-inner">
+    <button class="modal-close" onclick="closeVideoModal()">&#10005; Close</button>
+    <iframe id="modalFrame" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
+</div>
+
+<section id="why">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-label">Why Wedduxe</span>
+      <span class="gold-line"></span>
+      <h2>What Makes Us <em>Different</em></h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <span class="why-icon">&#127916;</span>
+        <h3>Cinematic Editing</h3>
+        <p>Every film is edited with a director's eye &mdash; precise cuts, cinematic pacing, and storytelling that gives your footage a true cinematic feel.</p>
+      </div>
+      <div class="why-card reveal">
+        <span class="why-icon">&#127912;</span>
+        <h3>Premium Color Grading</h3>
+        <p>Our signature color work transforms raw footage into rich, moody, and beautifully toned visuals that look stunning on any screen.</p>
+      </div>
+      <div class="why-card reveal">
+        <span class="why-icon">&#128142;</span>
+        <h3>7+ Years of Craft</h3>
+        <p>500+ wedding films delivered. We've worked with couples, studios, and photographers across Odisha and beyond with consistent excellence.</p>
+      </div>
+      <div class="why-card reveal">
+        <span class="why-icon">&#127925;</span>
+        <h3>Emotional Music Sync</h3>
+        <p>We score every film with music that amplifies emotion &mdash; so when you watch, you don't just see your wedding, you feel it all over again.</p>
+      </div>
+      <div class="why-card reveal">
+        <span class="why-icon">&#9889;</span>
+        <h3>Fast Turnaround</h3>
+        <p>We respect your timeline. Every project is delivered on schedule without compromising on quality &mdash; because your memories can't wait.</p>
+      </div>
+      <div class="why-card reveal">
+        <span class="why-icon">&#129309;</span>
+        <h3>Trusted by Studios</h3>
+        <p>20+ professional photography and videography studios trust Wedduxe as their dedicated post-production editing partner.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-label">Client Stories</span>
+      <span class="gold-line"></span>
+      <h2>Words From Our <em>Clients</em></h2>
+      <div class="google-rating-summary reveal">
+        <div class="google-logo">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:22px;height:22px;">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+          </svg>
+        </div>
+        <div class="google-score">
+          <span class="google-number">5.0</span>
+          <div class="google-stars-row">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <span class="google-count">Based on client reviews</span>
+        </div>
+      </div>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="review-header">
+          <div class="reviewer-avatar">P</div>
+          <div class="reviewer-info">
+            <strong>Priya &amp; Arjun</strong>
+            <span class="reviewer-sub">Bhubaneswar Wedding</span>
+          </div>
+          <div class="google-badge">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px;">
+              <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+              <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+              <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+              <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+            </svg>
+          </div>
+        </div>
+        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-text">WEDDUXE edited our wedding film so beautifully. Every emotion, every laugh, every tear &mdash; perfectly preserved. We watch it every anniversary. It's pure cinema.</p>
+        <div class="review-date">3 months ago</div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="review-header">
+          <div class="reviewer-avatar" style="background:linear-gradient(135deg,#BCA371,#8A7050)">S</div>
+          <div class="reviewer-info">
+            <strong>Sneha &amp; Rahul</strong>
+            <span class="reviewer-sub">Destination Wedding, Puri</span>
+          </div>
+          <div class="google-badge">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px;">
+              <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+              <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+              <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+              <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+            </svg>
+          </div>
+        </div>
+        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-text">The color grading and editing quality is on another level. Our highlight reel went viral on Instagram. Sumit and the team are absolute professionals.</p>
+        <div class="review-date">5 months ago</div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="review-header">
+          <div class="reviewer-avatar" style="background:linear-gradient(135deg,#2A1530,#361C3B)">A</div>
+          <div class="reviewer-info">
+            <strong>Ankita &amp; Rohan</strong>
+            <span class="reviewer-sub">Traditional Odia Wedding</span>
+          </div>
+          <div class="google-badge">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px;">
+              <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+              <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+              <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+              <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+            </svg>
+          </div>
+        </div>
+        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-text">They turned our footage into a cinematic masterpiece. The storytelling, the music, the pacing &mdash; everything was perfect. We couldn't have asked for more.</p>
+        <div class="review-date">1 month ago</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cta-band">
+  <div class="section-inner">
+    <div class="reveal">
+      <span class="section-label">Let's Create Together</span>
+      <span class="gold-line"></span>
+      <h2>Ready To Make Your<br><em>Wedding Film?</em></h2>
+      <p>Send us your footage and let's craft something extraordinary. Every love story deserves a cinematic touch.</p>
+      <div class="cta-buttons">
+        <a href="contact.html" class="btn btn-primary">Start Your Project</a>
+        <a href="https://wa.me/918328864906?text=Hi%20Wedduxe!%20I%20am%20interested%20in%20your%20wedding%20video%20editing%20services.%20Could%20you%20please%20let%20me%20know%20more%20about%20your%20packages%3F%20%F0%9F%8E%AC" target="_blank" class="btn btn-outline">
+          <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0;">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.464 3.488"/>
+          </svg>
+          WhatsApp Us
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">WEDD<span>U</span>XE</div>
+  <ul class="footer-nav">
+    <li><a href="#about">About</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="footer-social">
+    <a href="https://www.instagram.com/wedduxe/" target="_blank" title="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="var(--ivory-dim)" stroke-width="1.5" fill="none"/>
+        <circle cx="12" cy="12" r="4" stroke="var(--ivory-dim)" stroke-width="1.5" fill="none"/>
+        <circle cx="17.5" cy="6.5" r="1" fill="var(--ivory-dim)"/>
+      </svg>
+    </a>
+    <a href="https://www.youtube.com/@wedduxe" target="_blank" title="YouTube">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29.1 29.1 0 0 0 1 12a29.1 29.1 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29.1 29.1 0 0 0 23 12a29.1 29.1 0 0 0-.46-5.58z" stroke="var(--ivory-dim)" stroke-width="1.5" fill="none"/>
+        <polygon points="9.75,15.02 15.5,12 9.75,8.98 9.75,15.02" fill="var(--ivory-dim)"/>
+      </svg>
+    </a>
+  </div>
+  <span class="gold-line"></span>
+  <p class="footer-copy">&copy; 2025 WEDDUXE &middot; Luxury Wedding Video Editing &middot; Bhubaneswar, Odisha</p>
+</footer>
+
+<div class="floating-btns">
+  <div class="float-btn-wrap">
+    <span class="float-label">WhatsApp Us</span>
+    <a href="https://wa.me/918328864906?text=Hi%20Wedduxe!%20I%20am%20interested%20in%20your%20wedding%20video%20editing%20services.%20I%20would%20like%20to%20know%20more%20about%3A%0A%0A%E2%9C%A6%20Service%20type%20(Highlight%20Reel%20%2F%20Teaser%20%2F%20Pre-Wedding%20%2F%20Full%20Film)%0A%E2%9C%A6%20Pricing%20%26%20packages%0A%E2%9C%A6%20Delivery%20timeline%0A%0APlease%20guide%20me.%20Thank%20you!%20%F0%9F%8E%AC"
+       target="_blank" class="float-btn float-wa" title="WhatsApp Us">
+      <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.464 3.488"/>
+      </svg>
+    </a>
+  </div>
+  <div class="float-btn-wrap">
+    <span class="float-label">Instagram</span>
+    <a href="https://www.instagram.com/wedduxe/" target="_blank" class="float-btn float-ig" title="Follow on Instagram">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="white" stroke-width="1.8" fill="none"/>
+        <circle cx="12" cy="12" r="4" stroke="white" stroke-width="1.8" fill="none"/>
+        <circle cx="17.5" cy="6.5" r="1.1" fill="white"/>
+      </svg>
+    </a>
+  </div>
+</div>
+
+<script>
+  // CINEMATIC ANIMATED GRAIN
+  (function() {
+    const canvas = document.getElementById('grain-canvas');
+    const ctx = canvas.getContext('2d');
+    let animId;
+    let w, h;
+
+    function resize() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    }
+
+    function renderGrain() {
+      const imageData = ctx.createImageData(w, h);
+      const data = imageData.data;
+      for (let i = 0; i < data.length; i += 4) {
+        const v = (Math.random() * 255) | 0;
+        data[i] = v;
+        data[i+1] = v;
+        data[i+2] = v;
+        data[i+3] = 18;
+      }
+      ctx.putImageData(imageData, 0, 0);
+      animId = requestAnimationFrame(renderGrain);
+    }
+
+    resize();
+    window.addEventListener('resize', resize);
+    renderGrain();
+  })();
+
+  // HERO BACKGROUND VIDEO
+  var heroBgPlayer;
+  var playerReady = false;
+
+  (function fixVideoJitter() {
+    const heroBg = document.querySelector('.hero-video-bg');
+    if (!heroBg) return;
+    heroBg.style.willChange = 'transform';
+    heroBg.style.transform = 'translateZ(0)';
+    heroBg.style.backfaceVisibility = 'hidden';
+  })();
+
+  (function() {
+    var s = document.createElement('script');
+    s.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(s);
+  })();
+
+  function onYouTubeIframeAPIReady() {
+    heroBgPlayer = new YT.Player('heroBgVideo', {
+      videoId: 'ht9Hb7AjCgY',
+      playerVars: {
+        autoplay: 1, mute: 1, controls: 0, rel: 0,
+        modestbranding: 1, playsinline: 1, iv_load_policy: 3,
+        start: 7, end: 50, enablejsapi: 1,
+        origin: window.location.origin
+      },
+      events: {
+        onReady: function(e) {
+          playerReady = true;
+          e.target.mute();
+          e.target.playVideo();
+        },
+        onStateChange: function(e) {
+          if (e.data === YT.PlayerState.ENDED) {
+            e.target.seekTo(7, true);
+            e.target.playVideo();
+          }
+        }
+      }
+    });
+  }
+
+  function silentRetry() {
+    if (playerReady && heroBgPlayer && heroBgPlayer.getPlayerState) {
+      if (heroBgPlayer.getPlayerState() !== YT.PlayerState.PLAYING) {
+        heroBgPlayer.mute();
+        heroBgPlayer.seekTo(7, true);
+        heroBgPlayer.playVideo();
+      }
+    }
+  }
+  ['scroll','click','touchstart','keydown'].forEach(function(ev) {
+    document.addEventListener(ev, silentRetry, { once: true, passive: true });
+  });
+
+  // NAVBAR SCROLL
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 60));
+
+  // SCROLL REVEAL
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // MOBILE MENU
+  function openMenu() { document.getElementById('mobileMenu').classList.add('open'); }
+  function closeMenu() { document.getElementById('mobileMenu').classList.remove('open'); }
+
+  // QUOTE BAND
+  let currentQuote = 0;
+  const slides = document.querySelectorAll('.quote-slide');
+  const dots = document.querySelectorAll('.quote-dot');
+
+  function goToQuote(index) {
+    slides[currentQuote].classList.remove('active');
+    slides[currentQuote].classList.add('exiting');
+    dots[currentQuote].classList.remove('active');
+    setTimeout(() => {
+      slides[currentQuote].classList.remove('exiting');
+      currentQuote = index;
+      slides[currentQuote].classList.add('active');
+      dots[currentQuote].classList.add('active');
+    }, 600);
+  }
+
+  function nextQuote() {
+    const next = (currentQuote + 1) % slides.length;
+    goToQuote(next);
+  }
+
+  let quoteTimer = setInterval(nextQuote, 8000);
+
+  document.querySelectorAll('.quote-dot').forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      clearInterval(quoteTimer);
+      goToQuote(i);
+      quoteTimer = setInterval(nextQuote, 8000);
+    });
+  });
+
+  // PORTFOLIO CATEGORY TABS
+  const CATEGORY_KEYWORDS = {
+    highlight: ['highlight', 'reel', 'wedding film'],
+    teaser: ['teaser', 'trailer', 'cinematic'],
+    prewedding: ['pre-wedding', 'prewedding', 'pre wedding', 'engagement'],
+    full: ['full', 'documentary', 'complete']
+  };
+
+  let allVideoCards = [];
+
+  function filterPortfolio(category, btn) {
+    document.querySelectorAll('.portfolio-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    const grid = document.getElementById('yt-grid');
+    if (category === 'all') {
+      allVideoCards.forEach(card => { card.style.display = ''; });
+      return;
+    }
+    const keywords = CATEGORY_KEYWORDS[category] || [];
+    allVideoCards.forEach(card => {
+      const title = card.querySelector('.yt-title')?.textContent?.toLowerCase() || '';
+      const cat = card.dataset.category || '';
+      const match = cat === category || keywords.some(k => title.includes(k));
+      card.style.display = match ? '' : 'none';
+    });
+  }
+
+  function detectCategory(title) {
+    const t = title.toLowerCase();
+    for (const [cat, keywords] of Object.entries(CATEGORY_KEYWORDS)) {
+      if (keywords.some(k => t.includes(k))) return cat;
+    }
+    return 'highlight';
+  }
+
+  // YOUTUBE RSS SYNC
+  const YOUTUBE_CHANNEL_ID = 'UCiEBrNUNEYxHxXGLzn3IBdQ';
+
+  async function fetchRSS(channelId) {
+    const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
+    const proxies = [
+      `https://api.allorigins.win/get?url=${encodeURIComponent(rssUrl)}`,
+      `https://corsproxy.io/?${encodeURIComponent(rssUrl)}`,
+      `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(rssUrl)}`
+    ];
+    for (const proxy of proxies) {
+      try {
+        const res = await fetch(proxy, { signal: AbortSignal.timeout(6000) });
+        if (!res.ok) continue;
+        const text = await res.text();
+        let xmlText = text;
+        try { const j = JSON.parse(text); if (j.contents) xmlText = j.contents; } catch(e) {}
+        const xml = new DOMParser().parseFromString(xmlText, 'text/xml');
+        const entries = xml.querySelectorAll('entry');
+        if (entries.length) return entries;
+      } catch(e) { continue; }
+    }
+    return null;
+  }
+
+  async function loadYouTubeVideos() {
+    const grid = document.getElementById('yt-grid');
+    const entries = await fetchRSS(YOUTUBE_CHANNEL_ID);
+    if (!entries) {
+      grid.innerHTML = `<div class="yt-loading">
+        <p style="margin-bottom:1.2rem;">Could not load videos right now.</p>
+        <a href="https://www.youtube.com/@wedduxe" target="_blank" class="btn btn-outline" style="font-size:0.68rem;">View Our YouTube Channel</a>
+      </div>`;
+      return;
+    }
+    grid.innerHTML = '';
+    allVideoCards = [];
+    Array.from(entries).slice(0, 6).forEach(entry => {
+      const title = entry.querySelector('title')?.textContent || '';
+      const link = entry.querySelector('link')?.getAttribute('href') || '';
+      const pubDate = entry.querySelector('published')?.textContent || '';
+      const videoId = link.split('v=')[1]?.split('&')[0] || '';
+      const thumb = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+      const date = new Date(pubDate).toLocaleDateString('en-IN', { year:'numeric', month:'long', day:'numeric' });
+      const category = detectCategory(title);
+      const categoryLabels = {
+        highlight: 'Highlight Reel',
+        teaser: 'Teaser',
+        prewedding: 'Pre-Wedding',
+        full: 'Full Film'
+      };
+      const card = document.createElement('div');
+      card.className = 'yt-card reveal';
+      card.dataset.category = category;
+      card.innerHTML = `
+        <div class="yt-card-category">${categoryLabels[category] || 'Highlight Reel'}</div>
+        <div class="yt-thumb" onclick="openVideo('${videoId}')">
+          <img src="${thumb}" alt="${title}" loading="lazy" onerror="this.src='https://img.youtube.com/vi/${videoId}/hqdefault.jpg'"/>
+          <div class="yt-play">
+            <div class="yt-play-btn">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5.14v14l11-7-11-7z" fill="var(--plum-dark)"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="yt-info">
+          <div class="yt-title">${title}</div>
+          <div class="yt-date">${date}</div>
+        </div>`;
+      grid.appendChild(card);
+      allVideoCards.push(card);
+      observer.observe(card);
+    });
+  }
+  loadYouTubeVideos();
+
+  // VIDEO MODAL
+  function openVideo(id) {
+    document.getElementById('modalFrame').src = `https://www.youtube.com/embed/${id}?autoplay=1`;
+    document.getElementById('videoModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeVideoModal() {
+    document.getElementById('modalFrame').src = '';
+    document.getElementById('videoModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function closeModal(e) {
+    if (e.target === document.getElementById('videoModal')) closeVideoModal();
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeVideoModal(); });
+</script>
+</body>
+</html>
