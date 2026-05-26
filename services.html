@@ -5,7 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Services | WEDDUXE — Premium Wedding Video Editing</title>
   <meta name="description" content="WEDDUXE services — premium wedding video editing, color grading, highlights, reels and more."/>
+  <meta name="keywords" content="wedding video editing services, wedding film editor, color grading, wedding highlight reel, wedding teaser, pre-wedding film, Bhubaneswar"/>
+  <meta name="robots" content="index, follow"/>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+  <link rel="apple-touch-icon" href="favicon.svg"/>
+  <meta name="theme-color" content="#1E0D22"/>
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="WEDDUXE"/>
+  <meta property="og:title" content="Services | WEDDUXE"/>
+  <meta property="og:description" content="Premium wedding video editing services — full wedding films, highlight reels, teasers, color grading and more."/>
+  <meta property="og:image" content="og-image.svg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:locale" content="en_IN"/>
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Services | WEDDUXE"/>
+  <meta name="twitter:description" content="Premium wedding video editing services — full wedding films, highlight reels, teasers, and more."/>
+  <meta name="twitter:image" content="og-image.svg"/>
+
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
     :root {
@@ -170,11 +195,11 @@
     <li><a href="contact.html">Contact Us</a></li>
   </ul>
   <a href="contact.html" class="nav-cta">Book Your Project</a>
-  <div class="hamburger" onclick="openMenu()"><span></span><span></span><span></span></div>
+  <button class="hamburger" onclick="openMenu()" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
 </nav>
 
-<div class="mobile-menu" id="mobileMenu">
-  <button class="mobile-close" onclick="closeMenu()">&#10005;</button>
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Mobile navigation menu" aria-hidden="true">
+  <button class="mobile-close" onclick="closeMenu()" aria-label="Close menu">&#10005;</button>
   <a href="index.html#about" onclick="closeMenu()">About</a>
   <a href="index.html#portfolio" onclick="closeMenu()">Portfolio</a>
   <a href="services.html" onclick="closeMenu()">Services</a>
@@ -392,19 +417,19 @@
   <p class="footer-copy">&copy; 2025 WEDDUXE &middot; Premium Wedding Video Editing &middot; Bhubaneswar, Odisha</p>
 </footer>
 
-<div class="floating-btns">
+<div class="floating-btns" aria-label="Quick contact buttons">
   <div class="float-btn-wrap">
-    <span class="float-label">WhatsApp Us</span>
+    <span class="float-label" aria-hidden="true">WhatsApp Us</span>
     <a href="https://wa.me/918328864906?text=Hi%20Wedduxe!%20I%20am%20interested%20in%20your%20wedding%20video%20editing%20services.%20I%20would%20like%20to%20know%20more%20about%3A%0A%0A%E2%9C%A6%20Service%20type%20(Highlight%20Reel%20%2F%20Teaser%20%2F%20Pre-Wedding%20%2F%20Full%20Film)%0A%E2%9C%A6%20Pricing%20%26%20packages%0A%E2%9C%A6%20Delivery%20timeline%0A%0APlease%20guide%20me.%20Thank%20you!%20%F0%9F%8E%AC"
-       target="_blank" class="float-btn float-wa" title="WhatsApp Us">
+       target="_blank" rel="noopener" class="float-btn float-wa" title="WhatsApp Us" aria-label="Contact us on WhatsApp">
       <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.464 3.488"/>
       </svg>
     </a>
   </div>
   <div class="float-btn-wrap">
-    <span class="float-label">Instagram</span>
-    <a href="https://www.instagram.com/wedduxe/" target="_blank" class="float-btn float-ig" title="Follow on Instagram">
+    <span class="float-label" aria-hidden="true">Instagram</span>
+    <a href="https://www.instagram.com/wedduxe/" target="_blank" rel="noopener" class="float-btn float-ig" title="Follow on Instagram" aria-label="Follow Wedduxe on Instagram">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="white" stroke-width="1.8" fill="none"/>
         <circle cx="12" cy="12" r="4" stroke="white" stroke-width="1.8" fill="none"/>
@@ -418,9 +443,10 @@
   (function() {
     const canvas = document.getElementById('grain-canvas');
     const ctx = canvas.getContext('2d');
-    let w, h;
+    let animId, w, h, isRunning = false;
     function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
     function renderGrain() {
+      if (!isRunning) return;
       const imageData = ctx.createImageData(w, h);
       const data = imageData.data;
       for (let i = 0; i < data.length; i += 4) {
@@ -428,11 +454,14 @@
         data[i] = v; data[i+1] = v; data[i+2] = v; data[i+3] = 18;
       }
       ctx.putImageData(imageData, 0, 0);
-      requestAnimationFrame(renderGrain);
+      animId = requestAnimationFrame(renderGrain);
     }
+    function start() { if (!isRunning) { isRunning = true; renderGrain(); } }
+    function stop() { isRunning = false; if (animId) cancelAnimationFrame(animId); }
     resize();
     window.addEventListener('resize', resize);
-    renderGrain();
+    document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); else start(); });
+    start();
   })();
 
   const observer = new IntersectionObserver(entries => {
@@ -444,8 +473,20 @@
     });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-  function openMenu() { document.getElementById('mobileMenu').classList.add('open'); }
-  function closeMenu() { document.getElementById('mobileMenu').classList.remove('open'); }
+  function openMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const burger = document.querySelector('.hamburger');
+    menu.classList.add('open');
+    menu.setAttribute('aria-hidden', 'false');
+    if (burger) burger.setAttribute('aria-expanded', 'true');
+  }
+  function closeMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const burger = document.querySelector('.hamburger');
+    menu.classList.remove('open');
+    menu.setAttribute('aria-hidden', 'true');
+    if (burger) burger.setAttribute('aria-expanded', 'false');
+  }
 </script>
 </body>
 </html>
