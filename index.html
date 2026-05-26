@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>WEDDUXE | Luxury Wedding Video Editing — Bhubaneswar, Odisha</title>
   <meta name="description" content="WEDDUXE — Luxury wedding video editing studio in Bhubaneswar, Odisha. Cinematic wedding films crafted with emotion. 7+ years, 500+ weddings delivered."/>
-  <meta name="keywords" content="wedding video editing, cinematic wedding films, wedding videographer Bhubaneswar, Odisha wedding video editor, wedding highlight reel, pre-wedding film editing, wedding teaser, color grading, WEDDUXE"/>
+  <meta name="keywords" content="wedding video editing Bhubaneswar, cinematic wedding films Odisha, luxury wedding editing India, wedding reel editor Bhubaneswar, professional wedding post production, wedding highlight reel Odisha, pre-wedding film editing, color grading wedding, WEDDUXE, wedding video editor Odisha, cinematic wedding films India"/>
   <meta name="author" content="WEDDUXE"/>
   <meta name="robots" content="index, follow"/>
 
@@ -586,28 +586,107 @@
     #cta-band p { color: var(--ivory-dim); font-size: 0.95rem; max-width: 480px; margin: 0 auto 2.5rem; line-height: 2; }
     .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 
+    /* FOUNDER SECTION */
+    #founder { background: var(--plum); border-top: 1px solid rgba(188,163,113,0.1); border-bottom: 1px solid rgba(188,163,113,0.1); }
+    .founder-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: center; max-width: 1100px; margin: 0 auto; }
+    .founder-visual { position: relative; }
+    .founder-avatar {
+      width: 100%; aspect-ratio: 1/1; max-width: 340px; margin: 0 auto;
+      background: var(--plum-mid);
+      border: 1px solid rgba(188,163,113,0.2);
+      position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .founder-avatar::before, .founder-avatar::after {
+      content: ''; position: absolute;
+      width: 28px; height: 28px; border-color: var(--gold); border-style: solid; z-index: 2; opacity: 0.6;
+    }
+    .founder-avatar::before { top: 10px; left: 10px; border-width: 1px 0 0 1px; }
+    .founder-avatar::after { bottom: 10px; right: 10px; border-width: 0 1px 1px 0; }
+    .founder-avatar-initials {
+      font-family: var(--ff-display); font-size: 6rem; font-weight: 300;
+      color: rgba(188,163,113,0.25); letter-spacing: 0.1em; user-select: none;
+    }
+    .founder-badge {
+      position: absolute; bottom: 1.2rem; left: 1.2rem; right: 1.2rem;
+      background: rgba(30,13,34,0.85); border: 1px solid rgba(188,163,113,0.2);
+      padding: 0.7rem 1rem; z-index: 3;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .founder-badge-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); flex-shrink: 0; animation: pulse 2s ease infinite; }
+    .founder-badge-text { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-light); }
+    .founder-text h2 { font-family: var(--ff-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 400; line-height: 1.2; margin-bottom: 0.6rem; }
+    .founder-text h2 em { color: var(--gold); font-style: italic; }
+    .founder-name { font-family: var(--ff-display); font-size: 1.4rem; color: var(--gold); font-weight: 400; margin-bottom: 0.3rem; }
+    .founder-role { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ivory-dim); margin-bottom: 1.8rem; }
+    .founder-text p { color: var(--ivory-dim); line-height: 2; margin-bottom: 1rem; font-size: 0.93rem; }
+    .founder-stats { display: flex; gap: 2.5rem; margin-top: 2rem; flex-wrap: wrap; }
+    .founder-stat-num { font-family: var(--ff-display); font-size: 2.2rem; font-weight: 300; color: var(--gold); line-height: 1; }
+    .founder-stat-label { font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ivory-dim); margin-top: 0.3rem; }
+
+    /* SOCIAL PROOF STRIP */
+    #social-proof {
+      background: var(--plum-dark);
+      border-top: 1px solid rgba(188,163,113,0.12);
+      border-bottom: 1px solid rgba(188,163,113,0.12);
+      padding: 2.5rem 5%;
+    }
+    .social-proof-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0; }
+    .sp-item {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1rem 2.5rem;
+      border-right: 1px solid rgba(188,163,113,0.1);
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    .sp-item:last-child { border-right: none; }
+    .sp-item:hover { background: rgba(188,163,113,0.04); }
+    .sp-icon { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .sp-icon svg { width: 22px; height: 22px; }
+    .sp-text-num { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; color: var(--gold); line-height: 1; }
+    .sp-text-label { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ivory-dim); margin-top: 0.2rem; }
+    .sp-trust { display: flex; align-items: center; gap: 0.6rem; padding: 1rem 2.5rem; }
+    .sp-trust-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+    .sp-trust-text { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ivory-dim); }
+
     /* FOOTER */
     footer {
       background: var(--plum-dark);
       border-top: 1px solid rgba(188,163,113,0.12);
-      padding: 3.5rem 5%; text-align: center;
+      padding: 4rem 5% 2.5rem;
     }
-    .footer-logo { font-family: var(--ff-display); font-size: 2rem; letter-spacing: 0.25em; color: var(--ivory); margin-bottom: 1.5rem; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: 3rem; margin-bottom: 3rem; }
+    .footer-brand {}
+    .footer-logo { font-family: var(--ff-display); font-size: 2rem; letter-spacing: 0.25em; color: var(--ivory); margin-bottom: 0.8rem; display: block; text-decoration: none; }
     .footer-logo span { color: var(--gold); }
-    .footer-nav { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; list-style: none; margin-bottom: 2rem; }
-    .footer-nav a { font-size: 0.63rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ivory-dim); text-decoration: none; transition: color 0.3s; }
-    .footer-nav a:hover { color: var(--gold); }
-    .footer-social { display: flex; gap: 1.2rem; justify-content: center; margin-bottom: 2rem; }
+    .footer-tagline { font-size: 0.78rem; color: var(--ivory-dim); line-height: 1.7; margin-bottom: 1.2rem; max-width: 240px; }
+    .footer-social { display: flex; gap: 0.8rem; margin-top: 1rem; }
     .footer-social a {
-      width: 40px; height: 40px; border-radius: 50%;
+      width: 36px; height: 36px; border-radius: 50%;
       border: 1px solid rgba(188,163,113,0.3);
       display: flex; align-items: center; justify-content: center;
-      text-decoration: none;
-      transition: all 0.3s;
+      text-decoration: none; transition: all 0.3s;
     }
     .footer-social a:hover { background: var(--gold); border-color: var(--gold); }
-    .footer-social a svg { width: 18px; height: 18px; }
-    .footer-copy { font-size: 0.68rem; color: var(--gold-dark); letter-spacing: 0.12em; }
+    .footer-social a svg { width: 16px; height: 16px; }
+    .footer-col h4 { font-size: 0.62rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.65rem; }
+    .footer-col ul li a { font-size: 0.8rem; color: var(--ivory-dim); text-decoration: none; transition: color 0.3s; }
+    .footer-col ul li a:hover { color: var(--gold); }
+    .footer-contact-item { display: flex; align-items: flex-start; gap: 0.7rem; margin-bottom: 0.9rem; }
+    .footer-contact-item svg { width: 15px; height: 15px; flex-shrink: 0; margin-top: 2px; }
+    .footer-contact-item a, .footer-contact-item span { font-size: 0.8rem; color: var(--ivory-dim); text-decoration: none; transition: color 0.3s; line-height: 1.5; }
+    .footer-contact-item a:hover { color: var(--gold); }
+    .footer-hours { margin-top: 0.5rem; }
+    .footer-hours-row { display: flex; justify-content: space-between; font-size: 0.72rem; padding: 0.35rem 0; border-bottom: 1px solid rgba(188,163,113,0.06); }
+    .footer-hours-row:last-child { border-bottom: none; }
+    .footer-hours-row span:first-child { color: var(--ivory-dim); }
+    .footer-hours-row span:last-child { color: var(--gold); }
+    .footer-bottom { border-top: 1px solid rgba(188,163,113,0.1); padding-top: 1.8rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .footer-copy { font-size: 0.65rem; color: var(--gold-dark); letter-spacing: 0.1em; }
+    .footer-made { font-size: 0.65rem; color: rgba(188,163,113,0.35); letter-spacing: 0.08em; }
 
     /* FLOATING BUTTONS */
     .floating-btns {
@@ -651,6 +730,7 @@
     @media (max-width: 1024px) {
       #yt-grid { grid-template-columns: repeat(2, 1fr); }
       .why-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-top { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 900px) {
       .nav-links { display: none; }
@@ -661,6 +741,8 @@
       .stat-item { border-right: none; border-bottom: 1px solid rgba(188,163,113,0.12); padding: 1.8rem 1.5rem; }
       .stat-item:last-child { border-bottom: none; }
       .stats-strip { flex-direction: column; }
+      .founder-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 600px) {
       section { padding: 4.5rem 5%; }
@@ -672,6 +754,9 @@
       .floating-btns { bottom: 1.2rem; right: 1.2rem; }
       .portfolio-tabs { width: 100%; }
       .portfolio-tab { flex: 1; padding: 0.65rem 0.8rem; font-size: 0.6rem; }
+      .sp-item { padding: 0.8rem 1.2rem; }
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; text-align: center; }
     }
   </style>
 </head>
@@ -707,11 +792,12 @@
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <h1 class="hero-title">Every Love Story<br>Deserves <em>Cinema</em></h1>
-    <p class="hero-tagline">Luxury wedding films crafted with emotion &mdash; turning your most precious moments into timeless cinematic memories.</p>
+    <p class="hero-eyebrow">&#10022; Luxury Wedding Video Editing &mdash; Bhubaneswar, Odisha</p>
+    <h1 class="hero-title">Where Real Emotions<br>Become <em>Timeless Cinema</em></h1>
+    <p class="hero-tagline">Not just edited &mdash; cinematically crafted. We transform your wedding footage into films that feel less like recordings and more like <em>art</em>.</p>
     <div class="hero-buttons">
-      <a href="contact.html" class="btn btn-primary">Book Your Project</a>
-      <a href="#portfolio" class="btn btn-outline">View Our Work</a>
+      <a href="contact.html" class="btn btn-primary">Send Your Footage Today</a>
+      <a href="#portfolio" class="btn btn-outline">Watch Our Films</a>
     </div>
   </div>
   <div class="hero-scroll">
@@ -725,6 +811,58 @@
   <div class="stat-item reveal"><div class="stat-number">500+</div><div class="stat-label">Wedding Films Edited</div></div>
   <div class="stat-item reveal"><div class="stat-number">20+</div><div class="stat-label">Studio Clients</div></div>
   <div class="stat-item reveal"><div class="stat-number">100%</div><div class="stat-label">Emotion Preserved</div></div>
+</div>
+
+<!-- SOCIAL PROOF STRIP -->
+<div id="social-proof">
+  <div class="social-proof-inner">
+    <a href="https://www.instagram.com/wedduxe/" target="_blank" rel="noopener" class="sp-item reveal">
+      <div class="sp-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="var(--gold)" stroke-width="1.5" fill="none"/>
+          <circle cx="12" cy="12" r="4" stroke="var(--gold)" stroke-width="1.5" fill="none"/>
+          <circle cx="17.5" cy="6.5" r="1" fill="var(--gold)"/>
+        </svg>
+      </div>
+      <div>
+        <div class="sp-text-num">Instagram</div>
+        <div class="sp-text-label">@wedduxe &mdash; Follow Us</div>
+      </div>
+    </a>
+    <a href="https://www.youtube.com/@wedduxe" target="_blank" rel="noopener" class="sp-item reveal">
+      <div class="sp-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29.1 29.1 0 0 0 1 12a29.1 29.1 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29.1 29.1 0 0 0 23 12a29.1 29.1 0 0 0-.46-5.58z" stroke="var(--gold)" stroke-width="1.5" fill="none"/>
+          <polygon points="9.75,15.02 15.5,12 9.75,8.98 9.75,15.02" fill="var(--gold)"/>
+        </svg>
+      </div>
+      <div>
+        <div class="sp-text-num">YouTube</div>
+        <div class="sp-text-label">@wedduxe &mdash; Watch Films</div>
+      </div>
+    </a>
+    <div class="sp-item reveal">
+      <div class="sp-icon" style="font-size:1.3rem;">&#127917;</div>
+      <div>
+        <div class="sp-text-num">20+</div>
+        <div class="sp-text-label">Studio Partners</div>
+      </div>
+    </div>
+    <div class="sp-item reveal">
+      <div class="sp-icon" style="font-size:1.3rem;">&#11088;</div>
+      <div>
+        <div class="sp-text-num">5.0</div>
+        <div class="sp-text-label">Google Rating</div>
+      </div>
+    </div>
+    <div class="sp-item reveal">
+      <div class="sp-icon" style="font-size:1.3rem;">&#127758;</div>
+      <div>
+        <div class="sp-text-num">Pan India</div>
+        <div class="sp-text-label">Serving Clients Across India</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div id="quote-band">
@@ -798,6 +936,47 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- FOUNDER SECTION -->
+<section id="founder">
+  <div class="founder-grid">
+
+    <div class="founder-visual reveal">
+      <div class="founder-avatar">
+        <div class="founder-avatar-initials">S</div>
+        <div class="founder-badge">
+          <div class="founder-badge-dot"></div>
+          <div class="founder-badge-text">Lead Editor &mdash; Wedduxe</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="founder-text reveal">
+      <span class="section-label">The Person Behind The Films</span>
+      <span class="gold-line left"></span>
+      <h2>Crafted With<br><em>Passion &amp; Purpose</em></h2>
+      <div class="founder-name">Sumit</div>
+      <div class="founder-role">Founder &amp; Lead Cinematic Editor</div>
+      <p>Every wedding film I create carries a piece of my heart. I started Wedduxe with one belief &mdash; that every couple deserves a film that doesn't just show what happened, but makes you <em>feel</em> it all over again.</p>
+      <p>With 7+ years of hands-on editing experience, I've personally worked on 500+ wedding films for studios and couples across India. From raw footage to a finished cinematic story, I handle every frame with the care it deserves.</p>
+      <div class="founder-stats">
+        <div>
+          <div class="founder-stat-num">7+</div>
+          <div class="founder-stat-label">Years Editing</div>
+        </div>
+        <div>
+          <div class="founder-stat-num">500+</div>
+          <div class="founder-stat-label">Films Delivered</div>
+        </div>
+        <div>
+          <div class="founder-stat-num">20+</div>
+          <div class="founder-stat-label">Studio Partners</div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -967,15 +1146,15 @@
     <div class="reveal">
       <span class="section-label">Let's Create Together</span>
       <span class="gold-line"></span>
-      <h2>Ready To Make Your<br><em>Wedding Film?</em></h2>
-      <p>Send us your footage and let's craft something extraordinary. Every love story deserves a cinematic touch.</p>
+      <h2>Ready To Start Your<br><em>Cinematic Wedding Film?</em></h2>
+      <p>Send us your footage and we'll craft something extraordinary. Every love story deserves a film that feels eternal.</p>
       <div class="cta-buttons">
-        <a href="contact.html" class="btn btn-primary">Start Your Project</a>
+        <a href="contact.html" class="btn btn-primary">Start Your Cinematic Film</a>
         <a href="https://wa.me/918328864906?text=Hi%20Wedduxe!%20I%20am%20interested%20in%20your%20wedding%20video%20editing%20services.%20Could%20you%20please%20let%20me%20know%20more%20about%20your%20packages%3F%20%F0%9F%8E%AC" target="_blank" class="btn btn-outline">
           <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0;">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.464 3.488"/>
           </svg>
-          WhatsApp Us
+          WhatsApp Us Now
         </a>
       </div>
     </div>
@@ -983,31 +1162,90 @@
 </section>
 
 <footer>
-  <div class="footer-logo">WEDD<span>U</span>XE</div>
-  <ul class="footer-nav">
-    <li><a href="#about">About</a></li>
-    <li><a href="#portfolio">Portfolio</a></li>
-    <li><a href="#why">Why Us</a></li>
-    <li><a href="services.html">Services</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-  <div class="footer-social">
-    <a href="https://www.instagram.com/wedduxe/" target="_blank" title="Instagram">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="var(--ivory-dim)" stroke-width="1.5" fill="none"/>
-        <circle cx="12" cy="12" r="4" stroke="var(--ivory-dim)" stroke-width="1.5" fill="none"/>
-        <circle cx="17.5" cy="6.5" r="1" fill="var(--ivory-dim)"/>
-      </svg>
-    </a>
-    <a href="https://www.youtube.com/@wedduxe" target="_blank" title="YouTube">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29.1 29.1 0 0 0 1 12a29.1 29.1 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29.1 29.1 0 0 0 23 12a29.1 29.1 0 0 0-.46-5.58z" stroke="var(--ivory-dim)" stroke-width="1.5" fill="none"/>
-        <polygon points="9.75,15.02 15.5,12 9.75,8.98 9.75,15.02" fill="var(--ivory-dim)"/>
-      </svg>
-    </a>
+  <div class="footer-inner">
+    <div class="footer-top">
+
+      <!-- Brand -->
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo">WEDD<span>U</span>XE</a>
+        <p class="footer-tagline">Luxury wedding video editing studio crafting cinematic films with emotion &mdash; based in Bhubaneswar, Odisha.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/wedduxe/" target="_blank" title="Instagram" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="var(--ivory-dim)" stroke-width="1.5" fill="none"/>
+              <circle cx="12" cy="12" r="4" stroke="var(--ivory-dim)" stroke-width="1.5" fill="none"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="var(--ivory-dim)"/>
+            </svg>
+          </a>
+          <a href="https://www.youtube.com/@wedduxe" target="_blank" title="YouTube" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29.1 29.1 0 0 0 1 12a29.1 29.1 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29.1 29.1 0 0 0 23 12a29.1 29.1 0 0 0-.46-5.58z" stroke="var(--ivory-dim)" stroke-width="1.5" fill="none"/>
+              <polygon points="9.75,15.02 15.5,12 9.75,8.98 9.75,15.02" fill="var(--ivory-dim)"/>
+            </svg>
+          </a>
+          <a href="https://wa.me/918328864906" target="_blank" title="WhatsApp" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.464 3.488" stroke="var(--ivory-dim)" stroke-width="0.5" fill="var(--ivory-dim)" opacity="0.7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#about">About Wedduxe</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#why">Why Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="services.html#pricing">Pricing</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Services -->
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html">Full Wedding Film</a></li>
+          <li><a href="services.html">Highlight Reel</a></li>
+          <li><a href="services.html">Wedding Teaser</a></li>
+          <li><a href="services.html">Reels &amp; Shorts</a></li>
+          <li><a href="services.html">Pre-Wedding Edit</a></li>
+          <li><a href="services.html">Color Grading</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.68A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          <a href="tel:+918328864906">+91 83288 64906</a>
+        </div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <a href="mailto:wedduxe@gmail.com">wedduxe@gmail.com</a>
+        </div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Bhubaneswar, Odisha, India</span>
+        </div>
+        <div class="footer-hours" style="margin-top:1.2rem;">
+          <div class="footer-hours-row"><span>Mon &ndash; Fri</span><span>9am &ndash; 8pm</span></div>
+          <div class="footer-hours-row"><span>Saturday</span><span>10am &ndash; 6pm</span></div>
+          <div class="footer-hours-row"><span>Sunday</span><span>By Appointment</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2025 WEDDUXE &middot; Luxury Wedding Video Editing &middot; Bhubaneswar, Odisha</p>
+      <p class="footer-made">Crafted with &hearts; by Wedduxe</p>
+    </div>
   </div>
-  <span class="gold-line"></span>
-  <p class="footer-copy">&copy; 2025 WEDDUXE &middot; Luxury Wedding Video Editing &middot; Bhubaneswar, Odisha</p>
 </footer>
 
 <div class="floating-btns" aria-label="Quick contact buttons">
