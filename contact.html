@@ -11,260 +11,140 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
-    :root {
-      --plum: #361C3B; --plum-dark: #1E0D22; --plum-mid: #2A1530;
-      --ivory: #E8E2CD; --ivory-dim: #C9C2AC;
-      --gold: #BCA371; --gold-light: #D4BA8A; --gold-dark: #8A7050;
-      --ff-display: 'Cormorant Garamond', Georgia, serif;
-      --ff-body: 'Jost', sans-serif;
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { background: var(--plum-dark); color: var(--ivory); font-family: var(--ff-body); font-weight: 300; overflow-x: hidden; }
+    :root{--plum:#361C3B;--plum-dark:#1E0D22;--plum-mid:#2A1530;--ivory:#E8E2CD;--ivory-dim:#C9C2AC;--gold:#BCA371;--gold-light:#D4BA8A;--gold-dark:#8A7050;--ff-display:'Cormorant Garamond',Georgia,serif;--ff-body:'Jost',sans-serif;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--plum-dark);color:var(--ivory);font-family:var(--ff-body);font-weight:300;overflow-x:hidden;}
+    #grain-canvas{position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:0.055;mix-blend-mode:screen;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:1.6rem 5%;background:rgba(30,13,34,0.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(188,163,113,0.15);transition:background .4s,padding .4s;}
+    .nav-logo{font-family:var(--ff-display);font-size:1.55rem;font-weight:600;letter-spacing:.25em;color:var(--ivory);text-decoration:none;}
+    .nav-logo span{color:var(--gold);}
+    .nav-links{display:flex;gap:2.5rem;list-style:none;}
+    .nav-links a{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ivory);text-decoration:none;transition:color .3s,letter-spacing .3s;font-weight:700;}
+    .nav-links a:hover,.nav-links a.active{color:var(--gold);letter-spacing:.28em;}
+    .nav-cta{font-family:var(--ff-body);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;padding:.65rem 1.5rem;background:var(--gold);color:var(--plum-dark);text-decoration:none;transition:background .3s;white-space:nowrap;font-weight:700;}
+    .nav-cta:hover{background:var(--gold-light);}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;width:40px;height:40px;align-items:center;justify-content:center;}
+    .hamburger span{width:24px;height:1.5px;background:var(--ivory);transition:all .35s cubic-bezier(.4,0,.2,1);transform-origin:center;display:block;}
+    .hamburger.is-open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+    .hamburger.is-open span:nth-child(2){opacity:0;transform:scaleX(0);}
+    .hamburger.is-open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+    .mobile-menu{display:none;position:fixed;inset:0;background:rgba(30,13,34,.98);backdrop-filter:blur(16px);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;opacity:0;transition:opacity .3s ease;}
+    .mobile-menu.open{display:flex;}.mobile-menu.visible{opacity:1;}
+    .mobile-menu a{font-family:var(--ff-display);font-size:2rem;color:var(--ivory);text-decoration:none;letter-spacing:.08em;transition:color .2s,transform .2s;}
+    .mobile-menu a:hover{color:var(--gold);transform:translateX(8px);}
+    .mobile-close{position:absolute;top:1.5rem;right:5%;width:48px;height:48px;font-size:1.4rem;color:var(--ivory);cursor:pointer;background:rgba(188,163,113,.15);border:1px solid rgba(188,163,113,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .2s,color .2s;}
+    .mobile-close:hover{background:var(--gold);color:var(--plum-dark);}
+    .gold-line{display:block;width:60px;height:1px;background:var(--gold);margin:1.3rem auto;}
+    .gold-line.left{margin-left:0;}
+    .section-label{font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);}
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease;}
+    .reveal.visible{opacity:1;transform:none;}
 
-    /* ── CINEMATIC GRAIN CANVAS ── */
-    #grain-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.055; mix-blend-mode: screen; }
-
-    /* NAV */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1.6rem 5%;
-      background: rgba(30,13,34,0.96);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(188,163,113,0.15);
-      transition: background 0.4s, padding 0.4s;
+    .page-hero{padding:10rem 5% 5rem;text-align:center;background:linear-gradient(160deg,var(--plum-dark) 0%,var(--plum) 50%,var(--plum-dark) 100%);border-bottom:1px solid rgba(188,163,113,.15);position:relative;overflow:hidden;}
+    .page-hero::before{content:'HELLO';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--ff-display);font-size:18vw;font-weight:300;color:rgba(188,163,113,.04);letter-spacing:.2em;white-space:nowrap;pointer-events:none;}
+    .page-hero h1{font-family:var(--ff-display);font-size:clamp(2.5rem,6vw,5rem);font-weight:300;line-height:1.1;position:relative;}
+    .page-hero h1 em{font-style:italic;color:var(--gold);}
+    .page-hero p{margin:1.5rem auto 0;max-width:500px;color:var(--ivory-dim);line-height:1.9;font-size:.95rem;position:relative;}
+    .quick-contact{padding:4rem 5%;background:var(--plum-mid);}
+    .quick-contact-grid{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+    .quick-card{text-align:center;padding:2.5rem 1.5rem;border:1px solid rgba(188,163,113,.15);background:var(--plum);cursor:pointer;text-decoration:none;transition:border-color .3s,background .3s,transform .3s;display:block;}
+    .quick-card:hover{border-color:var(--gold);background:var(--plum-mid);transform:translateY(-3px);}
+    .quick-icon{margin-bottom:1rem;display:flex;align-items:center;justify-content:center;}
+    .quick-icon svg{width:32px;height:32px;}
+    .quick-card h3{font-family:var(--ff-display);font-size:1.2rem;font-weight:400;color:var(--ivory);margin-bottom:.5rem;}
+    .quick-card p{font-size:.8rem;color:var(--ivory-dim);line-height:1.6;}
+    .quick-card .quick-value{font-size:.9rem;color:var(--gold);margin-top:.5rem;font-weight:400;}
+    .contact-section{padding:6rem 5%;}
+    .section-inner{max-width:1200px;margin:0 auto;}
+    .contact-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:5rem;align-items:start;}
+    .contact-info h2{font-family:var(--ff-display);font-size:clamp(2rem,4vw,3rem);font-weight:300;margin-bottom:.5rem;}
+    .contact-info h2 em{color:var(--gold);font-style:italic;}
+    .contact-info>p{color:var(--ivory-dim);line-height:1.9;margin-bottom:2.5rem;font-size:.93rem;}
+    .info-item{display:flex;align-items:flex-start;gap:1.2rem;margin-bottom:2rem;}
+    .info-icon{width:48px;height:48px;border:1px solid rgba(188,163,113,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .info-icon svg{width:20px;height:20px;}
+    .info-text small{display:block;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem;}
+    .info-text a,.info-text span{color:var(--ivory);text-decoration:none;font-size:.95rem;display:block;transition:color .3s;}
+    .info-text a:hover{color:var(--gold);}
+    .info-text .sub{font-size:.75rem;color:var(--ivory-dim);margin-top:.2rem;}
+    .hours-table{margin-top:3rem;border-top:1px solid rgba(188,163,113,.12);padding-top:2rem;}
+    .hours-table h4{font-family:var(--ff-display);font-size:1.2rem;font-weight:400;color:var(--ivory);margin-bottom:1.2rem;}
+    .hours-row{display:flex;justify-content:space-between;padding:.6rem 0;border-bottom:1px solid rgba(188,163,113,.07);font-size:.82rem;}
+    .hours-row:last-child{border-bottom:none;}
+    .hours-row span:first-child{color:var(--ivory-dim);}
+    .hours-row span:last-child{color:var(--gold);}
+    .contact-form-wrap{background:var(--plum-mid);padding:3rem;border:1px solid rgba(188,163,113,.1);}
+    .form-title{font-family:var(--ff-display);font-size:1.5rem;font-weight:400;color:var(--ivory);margin-bottom:.5rem;}
+    .form-subtitle{font-size:.78rem;color:var(--ivory-dim);margin-bottom:2rem;letter-spacing:.05em;}
+    .form-group{margin-bottom:1.4rem;}
+    .form-group label{display:block;font-size:.63rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem;}
+    .form-group input,.form-group select,.form-group textarea{width:100%;background:rgba(30,13,34,.7);border:1px solid rgba(188,163,113,.18);color:var(--ivory);font-family:var(--ff-body);font-size:.88rem;padding:.9rem 1.1rem;transition:border-color .3s;outline:none;-webkit-appearance:none;border-radius:0;}
+    .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--gold);}
+    .form-group input::placeholder,.form-group textarea::placeholder{color:rgba(201,194,172,.4);}
+    .form-group select option{background:var(--plum-dark);}
+    .form-group textarea{resize:vertical;min-height:110px;}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+    .form-submit{width:100%;padding:1.1rem;background:var(--gold);color:var(--plum-dark);border:none;font-family:var(--ff-body);font-size:.72rem;letter-spacing:.25em;text-transform:uppercase;cursor:pointer;transition:background .3s;margin-top:.5rem;display:flex;align-items:center;justify-content:center;gap:.5rem;}
+    .form-submit:hover{background:var(--gold-light);}
+    .form-submit svg{width:18px;height:18px;flex-shrink:0;}
+    .form-note{margin-top:1rem;font-size:.72rem;color:var(--ivory-dim);text-align:center;}
+    .form-success{display:none;text-align:center;padding:3rem;}
+    .form-success .success-icon{font-size:3rem;margin-bottom:1rem;}
+    .form-success h3{font-family:var(--ff-display);font-size:1.8rem;font-weight:300;color:var(--gold);margin-bottom:.8rem;}
+    .form-success p{font-size:.88rem;color:var(--ivory-dim);line-height:1.8;}
+    footer{background:var(--plum-dark);border-top:1px solid rgba(188,163,113,.12);padding:3.5rem 5% 0;}
+    .footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr 1.3fr;gap:2.5rem;align-items:start;padding-bottom:2.5rem;border-bottom:1px solid rgba(188,163,113,.1);}
+    .footer-brand{display:flex;flex-direction:column;gap:.8rem;}
+    .footer-logo{font-family:var(--ff-display);font-size:2rem;letter-spacing:.25em;color:var(--ivory);}
+    .footer-logo span{color:var(--gold);}
+    .footer-tagline{font-size:.72rem;letter-spacing:.1em;color:var(--ivory-dim);line-height:1.8;}
+    .footer-social{display:flex;gap:.7rem;margin-top:.5rem;flex-wrap:wrap;}
+    .footer-social a{width:36px;height:36px;border-radius:50%;border:1px solid rgba(188,163,113,.3);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:all .3s;}
+    .footer-social a:hover{background:var(--gold);border-color:var(--gold);}
+    .footer-social a svg{width:15px;height:15px;}
+    .footer-col-title{font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:1.2rem;}
+    .footer-col-links{list-style:none;display:flex;flex-direction:column;gap:.65rem;}
+    .footer-col-links li{display:flex;align-items:center;gap:.45rem;}
+    .footer-col-links li::before{content:'›';color:var(--gold);font-size:1rem;line-height:1;}
+    .footer-col-links a{font-size:.8rem;color:var(--ivory-dim);text-decoration:none;transition:color .3s;}
+    .footer-col-links a:hover{color:var(--gold);}
+    .footer-contact-list{display:flex;flex-direction:column;gap:.9rem;}
+    .footer-contact-item{display:flex;gap:.6rem;align-items:flex-start;}
+    .footer-contact-icon{width:28px;height:28px;min-width:28px;border-radius:50%;background:rgba(188,163,113,.1);display:flex;align-items:center;justify-content:center;margin-top:1px;}
+    .footer-contact-icon svg{width:13px;height:13px;}
+    .footer-contact-text{font-size:.8rem;color:var(--ivory-dim);line-height:1.6;}
+    .footer-contact-text a{color:var(--ivory-dim);text-decoration:none;display:block;transition:color .3s;}
+    .footer-contact-text a:hover{color:var(--gold);}
+    .footer-bottom{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding:1.5rem 0;}
+    .footer-copy{font-size:.64rem;color:var(--gold-dark);letter-spacing:.12em;}
+    .footer-made{font-size:.62rem;color:rgba(188,163,113,.35);letter-spacing:.08em;}
+    .floating-btns{position:fixed;bottom:1.8rem;right:1.8rem;display:flex;flex-direction:column;gap:.8rem;z-index:500;}
+    .float-btn{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 4px 18px rgba(0,0,0,.45);transition:transform .3s,box-shadow .3s;}
+    .float-btn:hover{transform:scale(1.12);box-shadow:0 6px 22px rgba(0,0,0,.55);}
+    .float-wa{background:#25D366;}
+    .float-ig{background:linear-gradient(135deg,#f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);}
+    .float-btn svg{width:24px;height:24px;}
+    .float-btn-wrap{position:relative;display:flex;align-items:center;}
+    .float-label{position:absolute;right:62px;background:rgba(30,13,34,.9);color:var(--ivory);font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;padding:.3rem .7rem;white-space:nowrap;border:1px solid rgba(188,163,113,.2);opacity:0;pointer-events:none;transition:opacity .2s;}
+    .float-btn-wrap:hover .float-label{opacity:1;}
+    @media(max-width:900px){
+      .nav-links{display:none;}.hamburger{display:flex;}
+      .contact-grid{grid-template-columns:1fr;gap:3rem;}
+      .quick-contact-grid{grid-template-columns:1fr;}
+      .contact-form-wrap{padding:2rem;}
+      .form-row{grid-template-columns:1fr;}
+      .footer-inner{grid-template-columns:1fr 1fr;}
     }
-    .nav-logo {
-      font-family: var(--ff-display);
-      font-size: 1.55rem; font-weight: 600;
-      letter-spacing: 0.25em; color: var(--ivory);
-      text-decoration: none;
-    }
-    .nav-logo span { color: var(--gold); }
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-    .nav-links a {
-      font-size: 0.72rem; letter-spacing: 0.22em;
-      text-transform: uppercase; color: var(--ivory);
-      text-decoration: none; transition: color 0.3s, letter-spacing 0.3s;
-      font-weight: 700;
-    }
-    .nav-links a:hover, .nav-links a.active {
-      color: var(--gold);
-      letter-spacing: 0.28em;
-    }
-
-    .nav-cta {
-      font-family: var(--ff-body);
-      font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
-      padding: 0.65rem 1.5rem; background: var(--gold); color: var(--plum-dark);
-      text-decoration: none; transition: background 0.3s; white-space: nowrap;
-      font-weight: 700;
-    }
-    .nav-cta:hover { background: var(--gold-light); }
-    .hamburger {
-      display: none; flex-direction: column; gap: 5px; cursor: pointer;
-      width: 40px; height: 40px; align-items: center; justify-content: center;
-    }
-    .hamburger span {
-      width: 24px; height: 1.5px; background: var(--ivory);
-      transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
-      transform-origin: center; display: block;
-    }
-    .hamburger.is-open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-    .hamburger.is-open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-    .hamburger.is-open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-    .mobile-menu {
-      display: none; position: fixed; inset: 0;
-      background: rgba(30,13,34,0.98); backdrop-filter: blur(16px);
-      z-index: 999; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem;
-      opacity: 0; transition: opacity 0.3s ease;
-    }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu.visible { opacity: 1; }
-    .mobile-menu a {
-      font-family: var(--ff-display); font-size: 2rem; color: var(--ivory); text-decoration: none;
-      letter-spacing: 0.08em; transition: color 0.2s, transform 0.2s;
-    }
-    .mobile-menu a:hover { color: var(--gold); transform: translateX(8px); }
-    .mobile-close {
-      position: absolute; top: 1.5rem; right: 5%;
-      width: 48px; height: 48px;
-      font-size: 1.4rem; color: var(--ivory); cursor: pointer;
-      background: rgba(188,163,113,0.15); border: 1px solid rgba(188,163,113,0.3);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s, color 0.2s;
-    }
-    .mobile-close:hover { background: var(--gold); color: var(--plum-dark); }
-
-    /* UTILS */
-    .gold-line { display: block; width: 60px; height: 1px; background: var(--gold); margin: 1.3rem auto; }
-    .gold-line.left { margin-left: 0; }
-    .section-label { font-size: 0.68rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); }
-    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s ease, transform 0.8s ease; }
-    .reveal.visible { opacity: 1; transform: none; }
-
-    /* PAGE HERO */
-    .page-hero {
-      padding: 10rem 5% 5rem; text-align: center;
-      background: linear-gradient(160deg, var(--plum-dark) 0%, var(--plum) 50%, var(--plum-dark) 100%);
-      border-bottom: 1px solid rgba(188,163,113,0.15);
-      position: relative; overflow: hidden;
-    }
-    .page-hero::before {
-      content: 'HELLO';
-      position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      font-family: var(--ff-display); font-size: 18vw; font-weight: 300;
-      color: rgba(188,163,113,0.04); letter-spacing: 0.2em;
-      white-space: nowrap; pointer-events: none;
-    }
-    .page-hero h1 { font-family: var(--ff-display); font-size: clamp(2.5rem,6vw,5rem); font-weight: 300; line-height: 1.1; position: relative; }
-    .page-hero h1 em { font-style: italic; color: var(--gold); }
-    .page-hero p { margin: 1.5rem auto 0; max-width: 500px; color: var(--ivory-dim); line-height: 1.9; font-size: 0.95rem; position: relative; }
-
-
-    /* QUICK CONTACT CARDS */
-    .quick-contact { padding: 4rem 5%; background: var(--plum-mid); }
-    .quick-contact-grid { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-    .quick-card {
-      text-align: center; padding: 2.5rem 1.5rem;
-      border: 1px solid rgba(188,163,113,0.15);
-      background: var(--plum); cursor: pointer;
-      text-decoration: none;
-      transition: border-color 0.3s, background 0.3s, transform 0.3s;
-      display: block;
-    }
-    .quick-card:hover { border-color: var(--gold); background: var(--plum-mid); transform: translateY(-3px); }
-    .quick-icon { margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; }
-    .quick-icon svg { width: 32px; height: 32px; }
-    .quick-card h3 { font-family: var(--ff-display); font-size: 1.2rem; font-weight: 400; color: var(--ivory); margin-bottom: 0.5rem; }
-    .quick-card p { font-size: 0.8rem; color: var(--ivory-dim); line-height: 1.6; }
-    .quick-card .quick-value { font-size: 0.9rem; color: var(--gold); margin-top: 0.5rem; font-weight: 400; }
-
-    /* MAIN CONTACT */
-    .contact-section { padding: 6rem 5%; }
-    .section-inner { max-width: 1200px; margin: 0 auto; }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 5rem; align-items: start; }
-    .contact-info h2 { font-family: var(--ff-display); font-size: clamp(2rem,4vw,3rem); font-weight: 300; margin-bottom: 0.5rem; }
-    .contact-info h2 em { color: var(--gold); font-style: italic; }
-    .contact-info > p { color: var(--ivory-dim); line-height: 1.9; margin-bottom: 2.5rem; font-size: 0.93rem; }
-    .info-item { display: flex; align-items: flex-start; gap: 1.2rem; margin-bottom: 2rem; }
-    .info-icon { width: 48px; height: 48px; border: 1px solid rgba(188,163,113,0.3); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .info-icon svg { width: 20px; height: 20px; }
-    .info-text small { display: block; font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
-    .info-text a, .info-text span { color: var(--ivory); text-decoration: none; font-size: 0.95rem; display: block; transition: color 0.3s; }
-    .info-text a:hover { color: var(--gold); }
-    .info-text .sub { font-size: 0.75rem; color: var(--ivory-dim); margin-top: 0.2rem; }
-
-    .hours-table { margin-top: 2rem; border-top: 1px solid rgba(188,163,113,0.12); padding-top: 1.8rem; }
-    .hours-table h4 { font-family: var(--ff-display); font-size: 1.2rem; font-weight: 400; color: var(--ivory); margin-bottom: 1.2rem; }
-    .hours-row { display: flex; justify-content: space-between; padding: 0.6rem 0; border-bottom: 1px solid rgba(188,163,113,0.07); font-size: 0.82rem; }
-    .hours-row:last-child { border-bottom: none; }
-    .hours-row span:first-child { color: var(--ivory-dim); }
-    .hours-row span:last-child { color: var(--gold); }
-
-    /* FORM */
-    .contact-form-wrap { background: var(--plum-mid); padding: 3rem; border: 1px solid rgba(188,163,113,0.1); }
-    .form-title { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 400; color: var(--ivory); margin-bottom: 0.5rem; }
-    .form-subtitle { font-size: 0.78rem; color: var(--ivory-dim); margin-bottom: 2rem; letter-spacing: 0.05em; }
-    .form-group { margin-bottom: 1.4rem; }
-    .form-group label { display: block; font-size: 0.63rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem; }
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%; background: rgba(30,13,34,0.7);
-      border: 1px solid rgba(188,163,113,0.18);
-      color: var(--ivory); font-family: var(--ff-body);
-      font-size: 0.88rem; padding: 0.9rem 1.1rem;
-      transition: border-color 0.3s; outline: none;
-      -webkit-appearance: none; border-radius: 0;
-    }
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus { border-color: var(--gold); }
-    .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(201,194,172,0.4); }
-    .form-group select option { background: var(--plum-dark); }
-    .form-group textarea { resize: vertical; min-height: 110px; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    .form-submit {
-      width: 100%; padding: 1.1rem;
-      background: var(--gold); color: var(--plum-dark);
-      border: none; font-family: var(--ff-body);
-      font-size: 0.72rem; letter-spacing: 0.25em;
-      text-transform: uppercase; cursor: pointer;
-      transition: background 0.3s; margin-top: 0.5rem;
-      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
-    }
-    .form-submit:hover { background: var(--gold-light); }
-    .form-submit svg { width: 18px; height: 18px; flex-shrink: 0; }
-    .form-note { margin-top: 1rem; font-size: 0.72rem; color: var(--ivory-dim); text-align: center; }
-
-    .form-success { display: none; text-align: center; padding: 3rem; }
-    .form-success .success-icon { font-size: 3rem; margin-bottom: 1rem; }
-    .form-success h3 { font-family: var(--ff-display); font-size: 1.8rem; font-weight: 300; color: var(--gold); margin-bottom: 0.8rem; }
-    .form-success p { font-size: 0.88rem; color: var(--ivory-dim); line-height: 1.8; }
-
-
-    /* FOOTER */
-    footer { background: var(--plum-dark); border-top: 1px solid rgba(188,163,113,0.12); padding: 3.5rem 5% 0; }
-    .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.3fr; gap: 2.5rem; align-items: start; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(188,163,113,0.1); }
-    .footer-brand { display: flex; flex-direction: column; gap: 0.8rem; }
-    .footer-logo { font-family: var(--ff-display); font-size: 2rem; letter-spacing: 0.25em; color: var(--ivory); }
-    .footer-logo span { color: var(--gold); }
-    .footer-tagline { font-size: 0.72rem; letter-spacing: 0.1em; color: var(--ivory-dim); line-height: 1.8; }
-    .footer-social { display: flex; gap: 0.7rem; margin-top: 0.5rem; flex-wrap: wrap; }
-    .footer-social a { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(188,163,113,0.3); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.3s; }
-    .footer-social a:hover { background: var(--gold); border-color: var(--gold); }
-    .footer-social a svg { width: 15px; height: 15px; }
-    .footer-col-title { font-size: 0.68rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 1.2rem; }
-    .footer-col-links { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
-    .footer-col-links li { display: flex; align-items: center; gap: 0.45rem; }
-    .footer-col-links li::before { content: '›'; color: var(--gold); font-size: 1rem; line-height: 1; }
-    .footer-col-links a { font-size: 0.8rem; color: var(--ivory-dim); text-decoration: none; transition: color 0.3s; }
-    .footer-col-links a:hover { color: var(--gold); }
-    .footer-contact-list { display: flex; flex-direction: column; gap: 0.9rem; }
-    .footer-contact-item { display: flex; gap: 0.6rem; align-items: flex-start; }
-    .footer-contact-icon { width: 28px; height: 28px; min-width: 28px; border-radius: 50%; background: rgba(188,163,113,0.1); display: flex; align-items: center; justify-content: center; margin-top: 1px; }
-    .footer-contact-icon svg { width: 13px; height: 13px; }
-    .footer-contact-text { font-size: 0.8rem; color: var(--ivory-dim); line-height: 1.6; }
-    .footer-contact-text a { color: var(--ivory-dim); text-decoration: none; display: block; transition: color 0.3s; }
-    .footer-contact-text a:hover { color: var(--gold); }
-    .footer-bottom { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding: 1.5rem 0; }
-    .footer-copy { font-size: 0.64rem; color: var(--gold-dark); letter-spacing: 0.12em; }
-    .footer-made { font-size: 0.62rem; color: rgba(188,163,113,0.35); letter-spacing: 0.08em; }
-    @media (max-width: 900px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 600px) { .footer-inner { grid-template-columns: 1fr; gap: 2rem; } }
-
-    /* FLOATING BUTTONS */
-    .floating-btns { position: fixed; bottom: 1.8rem; right: 1.8rem; display: flex; flex-direction: column; gap: 0.8rem; z-index: 500; }
-    .float-btn { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 18px rgba(0,0,0,0.45); transition: transform 0.3s, box-shadow 0.3s; }
-    .float-btn:hover { transform: scale(1.12); box-shadow: 0 6px 22px rgba(0,0,0,0.55); }
-    .float-wa { background: #25D366; }
-    .float-ig { background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
-    .float-btn svg { width: 24px; height: 24px; }
-    .float-btn-wrap { position: relative; display: flex; align-items: center; }
-    .float-label { position: absolute; right: 62px; background: rgba(30,13,34,0.9); color: var(--ivory); font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.3rem 0.7rem; white-space: nowrap; border: 1px solid rgba(188,163,113,0.2); opacity: 0; pointer-events: none; transition: opacity 0.2s; }
-    .float-btn-wrap:hover .float-label { opacity: 1; }
-
-    @media (max-width: 900px) {
-      .nav-links { display: none; }
-      .hamburger { display: flex; }
-      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .quick-contact-grid { grid-template-columns: 1fr; }
-      .contact-form-wrap { padding: 2rem; }
-      .form-row { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 600px) {
-      .contact-section { padding: 4rem 5%; }
-      .float-btn { width: 48px; height: 48px; }
-      .floating-btns { bottom: 1.2rem; right: 1.2rem; }
+    @media(max-width:600px){
+      .contact-section{padding:4rem 5%;}
+      .float-btn{width:48px;height:48px;}
+      .floating-btns{bottom:1.2rem;right:1.2rem;}
+      .footer-inner{grid-template-columns:1fr;gap:2rem;}
     }
   </style>
 </head>
 <body>
-
 <canvas id="grain-canvas"></canvas>
 
 <!-- NAV -->
@@ -277,9 +157,9 @@
     <li><a href="services.html">Services</a></li>
     <li><a href="contact.html" class="active">Contact</a></li>
   </ul>
+  <a href="contact.html" class="nav-cta">Book Your Project</a>
   <div class="hamburger" aria-label="Toggle navigation menu" role="button" tabindex="0"><span></span><span></span><span></span></div>
 </nav>
-
 <div class="mobile-menu" id="mobileMenu">
   <button class="mobile-close" onclick="closeMenu()">✕</button>
   <a href="index.html#about" onclick="closeMenu()">About</a>
@@ -287,9 +167,8 @@
   <a href="index.html#why" onclick="closeMenu()">Why Us</a>
   <a href="services.html" onclick="closeMenu()">Services</a>
   <a href="contact.html" onclick="closeMenu()">Contact</a>
-  <a href="contact.html" onclick="closeMenu()" style="margin-top:1rem;font-family:var(--ff-body);font-size:0.75rem;letter-spacing:0.22em;text-transform:uppercase;background:var(--gold);color:var(--plum-dark);padding:0.9rem 2.5rem;font-weight:700;">Book Your Project</a>
+  <a href="contact.html" onclick="closeMenu()" style="margin-top:1rem;font-family:var(--ff-body);font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;background:var(--gold);color:var(--plum-dark);padding:.9rem 2.5rem;font-weight:700;">Book Your Project</a>
 </div>
-
 
 <!-- PAGE HERO -->
 <div class="page-hero">
@@ -302,35 +181,25 @@
 <!-- QUICK CONTACT CARDS -->
 <div class="quick-contact">
   <div class="quick-contact-grid">
-    <!-- Phone -->
     <a href="tel:+918328864906" class="quick-card reveal">
       <div class="quick-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
-          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.68A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.68A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
       </div>
       <h3>Call Us</h3>
       <p>Talk to us directly</p>
       <div class="quick-value">+91 83288 64906</div>
     </a>
-    <!-- WhatsApp -->
     <a href="https://wa.me/918328864906?text=Hi%20Wedduxe!%20I%20am%20interested%20in%20your%20wedding%20video%20editing%20services.%20I%20would%20like%20to%20know%20more%20about%3A%0A%0A%E2%9C%A6%20Service%20type%20(Highlight%20Reel%20%2F%20Teaser%20%2F%20Pre-Wedding%20%2F%20Full%20Film)%0A%E2%9C%A6%20Pricing%20%26%20packages%0A%E2%9C%A6%20Delivery%20timeline%0A%0APlease%20guide%20me.%20Thank%20you!%20%F0%9F%8E%AC" target="_blank" class="quick-card reveal">
       <div class="quick-icon">
-        <svg viewBox="0 0 24 24" fill="var(--gold)" xmlns="http://www.w3.org/2000/svg">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.464 3.488"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="var(--gold)" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.464 3.488"/></svg>
       </div>
       <h3>WhatsApp</h3>
       <p>Fastest response guaranteed</p>
       <div class="quick-value">Chat with us now</div>
     </a>
-    <!-- Email -->
     <a href="mailto:wedduxe@gmail.com" class="quick-card reveal">
       <div class="quick-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
-          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-          <polyline points="22,6 12,13 2,6"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
       </div>
       <h3>Email Us</h3>
       <p>Send your project details</p>
@@ -344,7 +213,6 @@
 <div class="contact-section">
   <div class="section-inner">
     <div class="contact-grid">
-
       <!-- LEFT: Info -->
       <div class="contact-info reveal">
         <span class="section-label">Contact Details</span>
@@ -353,11 +221,7 @@
         <p>Whether you have a project in mind, a question about our services, or just want to see if we're the right fit — reach out. We respond within 24 hours.</p>
 
         <div class="info-item">
-          <div class="info-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
-              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.68A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
-            </svg>
-          </div>
+          <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.68A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
           <div class="info-text">
             <small>Phone &amp; WhatsApp</small>
             <a href="tel:+918328864906">+91 83288 64906</a>
@@ -366,12 +230,7 @@
         </div>
 
         <div class="info-item">
-          <div class="info-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-              <polyline points="22,6 12,13 2,6"/>
-            </svg>
-          </div>
+          <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
           <div class="info-text">
             <small>Email</small>
             <a href="mailto:wedduxe@gmail.com">wedduxe@gmail.com</a>
@@ -380,16 +239,33 @@
         </div>
 
         <div class="info-item">
-          <div class="info-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
-              <circle cx="12" cy="10" r="3"/>
-            </svg>
-          </div>
+          <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
           <div class="info-text">
             <small>Based In</small>
             <span>Bhubaneswar, Odisha, India</span>
             <span class="sub">Available for projects across India</span>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="var(--gold)" stroke-width="1.5" fill="none"/><circle cx="12" cy="12" r="4" stroke="var(--gold)" stroke-width="1.5" fill="none"/><circle cx="17.5" cy="6.5" r="1" fill="var(--gold)"/></svg>
+          </div>
+          <div class="info-text">
+            <small>Instagram</small>
+            <a href="https://www.instagram.com/wedduxe/" target="_blank">@wedduxe</a>
+            <span class="sub">Latest reels &amp; behind the scenes</span>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29.1 29.1 0 0 0 1 12a29.1 29.1 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29.1 29.1 0 0 0 23 12a29.1 29.1 0 0 0-.46-5.58z" stroke="var(--gold)" stroke-width="1.5" fill="none"/><polygon points="9.75,15.02 15.5,12 9.75,8.98 9.75,15.02" fill="var(--gold)"/></svg>
+          </div>
+          <div class="info-text">
+            <small>YouTube</small>
+            <a href="https://www.youtube.com/@wedduxe" target="_blank">@wedduxe</a>
+            <span class="sub">Full cinematic wedding films</span>
           </div>
         </div>
 
@@ -406,23 +282,11 @@
         <div id="formContent">
           <div class="form-title">Send an Enquiry</div>
           <div class="form-subtitle">Fill in the details below and we'll get back to you within 24 hours.</div>
-
           <div class="form-row">
-            <div class="form-group">
-              <label>Your Name *</label>
-              <input type="text" id="f-name" placeholder="Your full name"/>
-            </div>
-            <div class="form-group">
-              <label>Phone Number *</label>
-              <input type="tel" id="f-phone" placeholder="+91 XXXXX XXXXX"/>
-            </div>
+            <div class="form-group"><label>Your Name *</label><input type="text" id="f-name" placeholder="Your full name"/></div>
+            <div class="form-group"><label>Phone Number *</label><input type="tel" id="f-phone" placeholder="+91 XXXXX XXXXX"/></div>
           </div>
-
-          <div class="form-group">
-            <label>Email Address</label>
-            <input type="email" id="f-email" placeholder="your@email.com"/>
-          </div>
-
+          <div class="form-group"><label>Email Address</label><input type="email" id="f-email" placeholder="your@email.com"/></div>
           <div class="form-group">
             <label>Service Required *</label>
             <select id="f-service">
@@ -437,28 +301,19 @@
               <option>Multiple Services</option>
             </select>
           </div>
-
-          <div class="form-group">
-            <label>Tell Us About Your Project</label>
-            <textarea id="f-message" placeholder="Share your vision, style preferences, special moments you want highlighted, and anything else we should know..."></textarea>
-          </div>
-
+          <div class="form-group"><label>Tell Us About Your Project</label><textarea id="f-message" placeholder="Share your vision, style preferences, special moments you want highlighted, and anything else we should know..."></textarea></div>
           <button class="form-submit" onclick="submitEnquiry()">
-            <svg viewBox="0 0 24 24" fill="var(--plum-dark)" xmlns="http://www.w3.org/2000/svg">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.464 3.488"/>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="var(--plum-dark)" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.464 3.488"/></svg>
             Send Enquiry via WhatsApp ✦
           </button>
           <p class="form-note">Your message will open WhatsApp · We respond within 24 hours</p>
         </div>
-
         <div class="form-success" id="formSuccess">
           <div class="success-icon">✦</div>
           <h3>Message Sent!</h3>
           <p>Thank you for reaching out to WEDDUXE. We've received your enquiry and will get back to you within 24 hours.<br><br>For instant response, WhatsApp us at <strong style="color:var(--gold)">+91 83288 64906</strong></p>
         </div>
       </div>
-
     </div>
   </div>
 </div>
@@ -467,25 +322,15 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-
-    <!-- COL 1: Brand -->
     <div class="footer-brand">
       <div class="footer-logo">WEDD<span>U</span>XE</div>
       <p class="footer-tagline">Luxury Wedding Video Editing<br>Bhubaneswar, Odisha</p>
       <div class="footer-social">
-        <a href="https://www.instagram.com/wedduxe/" target="_blank" title="Instagram">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="var(--ivory-dim)" stroke-width="1.5" fill="none"/><circle cx="12" cy="12" r="4" stroke="var(--ivory-dim)" stroke-width="1.5" fill="none"/><circle cx="17.5" cy="6.5" r="1" fill="var(--ivory-dim)"/></svg>
-        </a>
-        <a href="https://www.youtube.com/@wedduxe" target="_blank" title="YouTube">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29.1 29.1 0 0 0 1 12a29.1 29.1 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29.1 29.1 0 0 0 23 12a29.1 29.1 0 0 0-.46-5.58z" stroke="var(--ivory-dim)" stroke-width="1.5" fill="none"/><polygon points="9.75,15.02 15.5,12 9.75,8.98 9.75,15.02" fill="var(--ivory-dim)"/></svg>
-        </a>
-        <a href="https://wa.me/918328864906" target="_blank" title="WhatsApp">
-          <svg viewBox="0 0 24 24" fill="var(--ivory-dim)" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.464 3.488"/></svg>
-        </a>
+        <a href="https://www.instagram.com/wedduxe/" target="_blank" title="Instagram"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="var(--ivory-dim)" stroke-width="1.5" fill="none"/><circle cx="12" cy="12" r="4" stroke="var(--ivory-dim)" stroke-width="1.5" fill="none"/><circle cx="17.5" cy="6.5" r="1" fill="var(--ivory-dim)"/></svg></a>
+        <a href="https://www.youtube.com/@wedduxe" target="_blank" title="YouTube"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29.1 29.1 0 0 0 1 12a29.1 29.1 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29.1 29.1 0 0 0 23 12a29.1 29.1 0 0 0-.46-5.58z" stroke="var(--ivory-dim)" stroke-width="1.5" fill="none"/><polygon points="9.75,15.02 15.5,12 9.75,8.98 9.75,15.02" fill="var(--ivory-dim)"/></svg></a>
+        <a href="https://wa.me/918328864906" target="_blank" title="WhatsApp"><svg viewBox="0 0 24 24" fill="var(--ivory-dim)" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.464 3.488"/></svg></a>
       </div>
     </div>
-
-    <!-- COL 2: Quick Links -->
     <div>
       <p class="footer-col-title">Quick Links</p>
       <ul class="footer-col-links">
@@ -496,8 +341,6 @@
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </div>
-
-    <!-- COL 3: More Info -->
     <div>
       <p class="footer-col-title">More Info</p>
       <ul class="footer-col-links">
@@ -506,123 +349,64 @@
         <li><a href="#">Terms &amp; Conditions</a></li>
       </ul>
     </div>
-
-    <!-- COL 4: Contact -->
     <div>
       <p class="footer-col-title">Contact</p>
       <div class="footer-contact-list">
-        <div class="footer-contact-item">
-          <div class="footer-contact-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="var(--gold)"/></svg></div>
-          <div class="footer-contact-text">Bhubaneswar, Odisha — India</div>
-        </div>
-        <div class="footer-contact-item">
-          <div class="footer-contact-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="var(--gold)"/></svg></div>
-          <div class="footer-contact-text"><a href="mailto:wedduxe@gmail.com">wedduxe@gmail.com</a></div>
-        </div>
-        <div class="footer-contact-item">
-          <div class="footer-contact-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" fill="var(--gold)"/></svg></div>
-          <div class="footer-contact-text"><a href="tel:+918328864906">+91 83288 64906</a></div>
-        </div>
+        <div class="footer-contact-item"><div class="footer-contact-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="var(--gold)"/></svg></div><div class="footer-contact-text">Bhubaneswar, Odisha — India</div></div>
+        <div class="footer-contact-item"><div class="footer-contact-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="var(--gold)"/></svg></div><div class="footer-contact-text"><a href="mailto:wedduxe@gmail.com">wedduxe@gmail.com</a></div></div>
+        <div class="footer-contact-item"><div class="footer-contact-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" fill="var(--gold)"/></svg></div><div class="footer-contact-text"><a href="tel:+918328864906">+91 83288 64906</a></div></div>
       </div>
     </div>
-
   </div>
-
   <div class="footer-bottom">
     <p class="footer-copy">© 2026 WEDDUXE · All Rights Reserved</p>
     <p class="footer-made">Luxury Wedding Video Editing · Est. 2018</p>
   </div>
 </footer>
 
-
 <!-- FLOATING BUTTONS -->
 <div class="floating-btns">
   <div class="float-btn-wrap">
     <span class="float-label">WhatsApp Us</span>
-    <a href="https://wa.me/918328864906?text=Hi%20Wedduxe!%20I%20am%20interested%20in%20your%20wedding%20video%20editing%20services.%20I%20would%20like%20to%20know%20more%20about%3A%0A%0A%E2%9C%A6%20Service%20type%20(Highlight%20Reel%20%2F%20Teaser%20%2F%20Pre-Wedding%20%2F%20Full%20Film)%0A%E2%9C%A6%20Pricing%20%26%20packages%0A%E2%9C%A6%20Delivery%20timeline%0A%0APlease%20guide%20me.%20Thank%20you!%20%F0%9F%8E%AC"
-       target="_blank" class="float-btn float-wa" title="WhatsApp Us">
-      <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.464 3.488"/>
-      </svg>
+    <a href="https://wa.me/918328864906?text=Hi%20Wedduxe!%20I%20am%20interested%20in%20your%20wedding%20video%20editing%20services.%20I%20would%20like%20to%20know%20more%20about%3A%0A%0A%E2%9C%A6%20Service%20type%20(Highlight%20Reel%20%2F%20Teaser%20%2F%20Pre-Wedding%20%2F%20Full%20Film)%0A%E2%9C%A6%20Pricing%20%26%20packages%0A%E2%9C%A6%20Delivery%20timeline%0A%0APlease%20guide%20me.%20Thank%20you!%20%F0%9F%8E%AC" target="_blank" class="float-btn float-wa" title="WhatsApp Us">
+      <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.464 3.488"/></svg>
     </a>
   </div>
   <div class="float-btn-wrap">
     <span class="float-label">Instagram</span>
     <a href="https://www.instagram.com/wedduxe/" target="_blank" class="float-btn float-ig" title="Follow on Instagram">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="white" stroke-width="1.8" fill="none"/>
-        <circle cx="12" cy="12" r="4" stroke="white" stroke-width="1.8" fill="none"/>
-        <circle cx="17.5" cy="6.5" r="1.1" fill="white"/>
-      </svg>
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="white" stroke-width="1.8" fill="none"/><circle cx="12" cy="12" r="4" stroke="white" stroke-width="1.8" fill="none"/><circle cx="17.5" cy="6.5" r="1.1" fill="white"/></svg>
     </a>
   </div>
 </div>
 
 <script>
-  // Cinematic grain
-  (function() {
-    const canvas = document.getElementById('grain-canvas');
-    const ctx = canvas.getContext('2d');
-    let w, h;
-    function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
-    function renderGrain() {
-      const imageData = ctx.createImageData(w, h);
-      const data = imageData.data;
-      for (let i = 0; i < data.length; i += 4) {
-        const v = (Math.random() * 255) | 0;
-        data[i] = v; data[i+1] = v; data[i+2] = v; data[i+3] = 18;
-      }
-      ctx.putImageData(imageData, 0, 0);
-      requestAnimationFrame(renderGrain);
-    }
-    resize();
-    window.addEventListener('resize', resize);
-    renderGrain();
-  })();
+  (function(){const c=document.getElementById('grain-canvas');const ctx=c.getContext('2d');let w,h;function r(){w=c.width=window.innerWidth;h=c.height=window.innerHeight;}function g(){const d=ctx.createImageData(w,h);const dt=d.data;for(let i=0;i<dt.length;i+=4){const v=(Math.random()*255)|0;dt[i]=v;dt[i+1]=v;dt[i+2]=v;dt[i+3]=18;}ctx.putImageData(d,0,0);requestAnimationFrame(g);}r();window.addEventListener('resize',r);g();})();
 
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 80);
-        observer.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  const observer=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*80);observer.unobserve(e.target);}});},{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 
-  // Mobile menu
-  const mobileMenu = document.getElementById('mobileMenu');
-  const hamburgerBtn = document.querySelector('.hamburger');
-  function openMenu() {
-    mobileMenu.classList.add('open');
-    requestAnimationFrame(() => mobileMenu.classList.add('visible'));
-    hamburgerBtn.classList.add('is-open');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeMenu() {
-    mobileMenu.classList.remove('visible');
-    hamburgerBtn.classList.remove('is-open');
-    setTimeout(() => { mobileMenu.classList.remove('open'); document.body.style.overflow = ''; }, 300);
-  }
-  hamburgerBtn.addEventListener('click', () => hamburgerBtn.classList.contains('is-open') ? closeMenu() : openMenu());
-  mobileMenu.addEventListener('click', e => { if (e.target === mobileMenu) closeMenu(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+  const mobileMenu=document.getElementById('mobileMenu');
+  const hamburgerBtn=document.querySelector('.hamburger');
+  function openMenu(){mobileMenu.classList.add('open');requestAnimationFrame(()=>mobileMenu.classList.add('visible'));hamburgerBtn.classList.add('is-open');document.body.style.overflow='hidden';}
+  function closeMenu(){mobileMenu.classList.remove('visible');hamburgerBtn.classList.remove('is-open');setTimeout(()=>{mobileMenu.classList.remove('open');document.body.style.overflow='';},300);}
+  hamburgerBtn.addEventListener('click',()=>hamburgerBtn.classList.contains('is-open')?closeMenu():openMenu());
+  mobileMenu.addEventListener('click',e=>{if(e.target===mobileMenu)closeMenu();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu();});
 
-  function submitEnquiry() {
-    const name = document.getElementById('f-name').value.trim();
-    const phone = document.getElementById('f-phone').value.trim();
-    const email = document.getElementById('f-email').value.trim();
-    const service = document.getElementById('f-service').value;
-    const message = document.getElementById('f-message').value.trim();
-
-    if (!name) { alert('Please enter your name.'); return; }
-    if (!phone) { alert('Please enter your phone number.'); return; }
-    if (!service) { alert('Please select a service.'); return; }
-
-    const wa = `Hello WEDDUXE! 🎬%0A%0A*New Project Enquiry*%0A%0A👤 *Name:* ${encodeURIComponent(name)}%0A📞 *Phone:* ${encodeURIComponent(phone)}%0A📧 *Email:* ${encodeURIComponent(email || 'Not provided')}%0A🎬 *Service:* ${encodeURIComponent(service)}%0A%0A💬 *Message:*%0A${encodeURIComponent(message || 'No additional message')}`;
-    window.open(`https://wa.me/918328864906?text=${wa}`, '_blank');
-    document.getElementById('formContent').style.display = 'none';
-    document.getElementById('formSuccess').style.display = 'block';
+  function submitEnquiry(){
+    const name=document.getElementById('f-name').value.trim();
+    const phone=document.getElementById('f-phone').value.trim();
+    const email=document.getElementById('f-email').value.trim();
+    const service=document.getElementById('f-service').value;
+    const message=document.getElementById('f-message').value.trim();
+    if(!name){alert('Please enter your name.');return;}
+    if(!phone){alert('Please enter your phone number.');return;}
+    if(!service){alert('Please select a service.');return;}
+    const wa=`Hello WEDDUXE! 🎬%0A%0A*New Project Enquiry*%0A%0A👤 *Name:* ${encodeURIComponent(name)}%0A📞 *Phone:* ${encodeURIComponent(phone)}%0A📧 *Email:* ${encodeURIComponent(email||'Not provided')}%0A🎬 *Service:* ${encodeURIComponent(service)}%0A%0A💬 *Message:*%0A${encodeURIComponent(message||'No additional message')}`;
+    window.open(`https://wa.me/918328864906?text=${wa}`,'_blank');
+    document.getElementById('formContent').style.display='none';
+    document.getElementById('formSuccess').style.display='block';
   }
 </script>
 </body>
